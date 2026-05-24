@@ -1,0 +1,306 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="retailers spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- if section.settings.heading != blank -%}
+      <p class="retailers__heading">{{ section.settings.heading | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="retailers__logos">
+        {%- for block in section.blocks -%}
+          <div class="retailers__logo" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="retailers__logo-link">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 300 }}"
+                    alt="{{ block.settings.alt_text | escape }}"
+                    loading="lazy"
+                    class="retailers__logo-img"
+                  >
+                </a>
+              {%- else -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 300 }}"
+                  alt="{{ block.settings.alt_text | escape }}"
+                  loading="lazy"
+                  class="retailers__logo-img"
+                >
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="retailers__btn-wrapper">
+        {%- if section.settings.button_url != blank -%}
+          <a href="{{ section.settings.button_url }}" class="retailers__btn">
+            {{ section.settings.button_text | escape }}
+          </a>
+        {%- else -%}
+          <a href="#" class="retailers__btn">
+            {{ section.settings.button_text | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .retailers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-inline: 24px;
+  }
+
+  .retailers__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #767676;
+    margin: 0;
+  }
+
+  .retailers__logos {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding-block: 24px;
+  }
+
+  .retailers__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .retailers__logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .retailers__logo-img {
+    max-height: 26px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.6;
+  }
+
+  .retailers__btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 8px;
+  }
+
+  .retailers__btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 28px;
+    padding: 12px 20px;
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .retailers {
+      padding-inline: 0;
+    }
+
+    .retailers__heading {
+      font-size: 32px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    .retailers__logos {
+      gap: 60px;
+    }
+
+    .retailers__logo-img {
+      max-height: 33px;
+    }
+
+    .retailers__btn {
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.retailers",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Trusted by leading retailers and available in more than 30,000 retail locations."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "Find Retailer"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "retailer-logo",
+      "name": "t:names.retailer_logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "t:settings.alt_text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings.link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.retailers",
+      "settings": {
+        "heading": "Trusted by leading retailers and available in more than 30,000 retail locations.",
+        "button_text": "Find Retailer",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": [
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "Sprouts"
+          }
+        },
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "Walmart"
+          }
+        },
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "GNC"
+          }
+        },
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "Target"
+          }
+        },
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "Sam's Club"
+          }
+        },
+        {
+          "type": "retailer-logo",
+          "settings": {
+            "alt_text": "Walmart"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

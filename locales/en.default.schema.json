@@ -467,7 +467,9 @@
     "money_back": "Money Back",
     "learn": "Learn",
     "video_card": "Video card",
-    "article_card": "Article card"
+    "article_card": "Article card",
+    "retailers": "Retailers",
+    "retailer_logo": "Retailer logo"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -791,6 +793,7 @@
     "actions_display_style": "Menu style",
     "alignment": "Alignment",
     "alignment_mobile": "Mobile alignment",
+    "alt_text": "Alt text",
     "align_baseline": "Align text baseline",
     "animation": "Animation",
     "animation_repeat": "Repeat animation",
