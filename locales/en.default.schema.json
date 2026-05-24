@@ -460,6 +460,7 @@
     "impact": "Impact",
     "impact_card": "Impact card",
     "community": "Community",
+    "deal": "Deal",
     "documentary": "Documentary",
     "ingredients": "Ingredients",
     "ingredient_card": "Ingredient card",
@@ -1216,6 +1217,7 @@
     "cta_text": "CTA text",
     "mobile_background": "Mobile background",
     "placeholder_text": "Placeholder text",
+    "price_label": "Price label",
     "search_url": "Search URL",
     "button_text": "Button text",
     "expert_image": "Expert image",
@@ -1282,7 +1284,8 @@
     "watch_title": "Watch title",
     "articles_title": "Articles title",
     "category": "Category",
-    "read_time": "Read time"
+    "read_time": "Read time",
+    "terms_text": "Terms text"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
