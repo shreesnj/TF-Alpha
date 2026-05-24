@@ -157,7 +157,12 @@
     "endorsement": "Endorsement",
     "pricing": "Pricing",
     "benefits": "Benefits",
-    "claims": "Claims"
+    "claims": "Claims",
+    "social": "Social",
+    "newsletter": "Newsletter",
+    "contact": "Contact",
+    "disclaimer": "Disclaimer",
+    "legal": "Legal"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -470,7 +475,8 @@
     "video_card": "Video card",
     "article_card": "Article card",
     "retailers": "Retailers",
-    "retailer_logo": "Retailer logo"
+    "retailer_logo": "Retailer logo",
+    "custom_footer": "Custom footer"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1299,7 +1305,22 @@
     "text_segment_2": "Text segment 2",
     "text_segment_3": "Text segment 3",
     "text_segment_4": "Text segment 4",
-    "terms_text": "Terms text"
+    "terms_text": "Terms text",
+    "instagram_url": "Instagram URL",
+    "twitter_url": "X (Twitter) URL",
+    "facebook_url": "Facebook URL",
+    "newsletter_heading": "Newsletter heading",
+    "newsletter_subtitle": "Newsletter subtitle",
+    "contact_address": "Address",
+    "contact_phone": "Phone",
+    "contact_email": "Email",
+    "disclaimer_text": "Disclaimer text",
+    "copyright_text": "Copyright text",
+    "terms_url": "Terms URL",
+    "terms_label": "Terms label",
+    "privacy_url": "Privacy URL",
+    "privacy_label": "Privacy label",
+    "badge_image": "Badge image"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
