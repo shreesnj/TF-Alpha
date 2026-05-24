@@ -1,0 +1,543 @@
+{%- liquid
+  assign star_rating_value = section.settings.star_rating | times: 1.0
+-%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="social-proof spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <div class="social-proof__header page-width-normal">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="social-proof__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      <div class="social-proof__rating">
+        {%- render 'star-rating', rating: star_rating_value, color: 'var(--color-primary)', size: 20 -%}
+        {%- if section.settings.review_count_text != blank -%}
+          <span class="social-proof__review-count">{{ section.settings.review_count_text | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div
+      class="social-proof__carousel"
+      style="--card-gap: {{ section.settings.card_gap }}px;"
+    >
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image-review' -%}
+            <div class="social-proof__card social-proof__card--image" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 560 }}"
+                  alt="{{ block.settings.quote_text | strip_html | truncate: 80 | escape }}"
+                  class="social-proof__card-image"
+                  width="280"
+                  height="420"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="social-proof__card-placeholder"></div>
+              {%- endif -%}
+              <div class="social-proof__card-overlay">
+                {%- if block.settings.quote_text != blank -%}
+                  <p class="social-proof__card-quote">{{ block.settings.quote_text }}</p>
+                {%- endif -%}
+                {%- if block.settings.attribution != blank -%}
+                  <p class="social-proof__card-attribution social-proof__card-attribution--image">{{ block.settings.attribution | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+
+          {%- when 'text-review' -%}
+            {%- assign block_star_rating = block.settings.star_rating | times: 1.0 -%}
+            <div class="social-proof__card social-proof__card--text" {{ block.shopify_attributes }}>
+              <div class="social-proof__card-text-inner">
+                {%- render 'star-rating', rating: block_star_rating, color: '#414141', size: 20 -%}
+                {%- if block.settings.quote_heading != blank -%}
+                  <p class="social-proof__card-quote-heading">{{ block.settings.quote_heading | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.quote_body != blank -%}
+                  <p class="social-proof__card-quote-body">{{ block.settings.quote_body | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.attribution != blank -%}
+                  <p class="social-proof__card-attribution">{{ block.settings.attribution | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .social-proof {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .social-proof__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 32px;
+    padding-block: 16px;
+  }
+
+  .social-proof__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 36px;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--color-foreground);
+    margin: 0;
+    word-break: break-word;
+  }
+
+  .social-proof__heading strong {
+    color: var(--color-foreground-heading);
+  }
+
+  .social-proof__rating {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .social-proof__review-count {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: var(--color-foreground);
+  }
+
+  .social-proof__carousel {
+    display: flex;
+    gap: var(--card-gap, 16px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-inline: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .social-proof__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-proof__card {
+    flex: 0 0 280px;
+    height: 420px;
+    border-radius: var(--style-border-radius-card, 16px);
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+
+  /* Image review card */
+  .social-proof__card--image {
+    position: relative;
+  }
+
+  .social-proof__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .social-proof__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-foreground);
+    opacity: 0.1;
+  }
+
+  .social-proof__card-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 32px;
+    right: 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .social-proof__card-quote {
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    color: var(--color-white, #ffffff);
+    margin: 0;
+  }
+
+  .social-proof__card-attribution--image {
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    color: var(--color-white, #ffffff);
+    margin: 0;
+  }
+
+  /* Text review card */
+  .social-proof__card--text {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-proof__card-text-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .social-proof__card-quote-heading {
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    color: #414141;
+    margin: 0;
+  }
+
+  .social-proof__card-quote-body {
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .social-proof__card-attribution {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: var(--color-foreground);
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Star rating component styles */
+  .star-rating {
+    display: inline-flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .star-rating__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .star-rating__icon svg {
+    width: var(--star-size, 20px);
+    height: var(--star-size, 20px);
+    display: block;
+  }
+
+  .star-rating__icon svg path {
+    fill: var(--star-color, currentColor);
+  }
+
+  @media screen and (min-width: 750px) {
+    .social-proof {
+      gap: 32px;
+    }
+
+    .social-proof__header {
+      padding-block: 0;
+    }
+
+    .social-proof__heading {
+      line-height: 52px;
+    }
+
+    .social-proof__review-count {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .social-proof__carousel {
+      padding-inline-start: var(--util-page-margin-offset, 40px);
+      padding-inline-end: 0;
+    }
+
+    .social-proof__card-quote {
+      font-size: 28px;
+      line-height: 40px;
+    }
+
+    .social-proof__card-attribution--image {
+      font-size: 28px;
+      line-height: 40px;
+    }
+
+    .social-proof__card-quote-heading {
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    .social-proof__card-quote-body {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .social-proof__card-attribution {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.social_proof_reviews",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Join <strong>millions of people</strong> prioritizing their cardiovascular health"
+    },
+    {
+      "type": "select",
+      "id": "star_rating",
+      "label": "t:settings.star_rating",
+      "options": [
+        { "value": "5", "label": "5" },
+        { "value": "4.5", "label": "4.5" },
+        { "value": "4", "label": "4" },
+        { "value": "3.5", "label": "3.5" },
+        { "value": "3", "label": "3" },
+        { "value": "2.5", "label": "2.5" },
+        { "value": "2", "label": "2" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1", "label": "1" }
+      ],
+      "default": "4.5"
+    },
+    {
+      "type": "text",
+      "id": "review_count_text",
+      "label": "t:settings.review_count_text",
+      "default": "100K+ verified reviews"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "t:settings.card_gap",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image-review",
+      "name": "t:names.image_review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "textarea",
+          "id": "quote_text",
+          "label": "t:settings.quote_text",
+          "default": "\"A product that is heart healthy AND tastes amazing.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "t:settings.attribution",
+          "default": "– Chris D."
+        }
+      ]
+    },
+    {
+      "type": "text-review",
+      "name": "t:names.text_review",
+      "settings": [
+        {
+          "type": "select",
+          "id": "star_rating",
+          "label": "t:settings.star_rating",
+          "options": [
+            { "value": "5", "label": "5" },
+            { "value": "4.5", "label": "4.5" },
+            { "value": "4", "label": "4" },
+            { "value": "3.5", "label": "3.5" },
+            { "value": "3", "label": "3" },
+            { "value": "2.5", "label": "2.5" },
+            { "value": "2", "label": "2" },
+            { "value": "1.5", "label": "1.5" },
+            { "value": "1", "label": "1" }
+          ],
+          "default": "4.5"
+        },
+        {
+          "type": "text",
+          "id": "quote_heading",
+          "label": "t:settings.quote_heading",
+          "default": "\"I actually feel better.\""
+        },
+        {
+          "type": "textarea",
+          "id": "quote_body",
+          "label": "t:settings.quote_body",
+          "default": "I never notice things like supplements and I didn't expect to with this either....I've been sleeping better, breathing better and feeling better overall and it's only been a month so far.\""
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "t:settings.attribution",
+          "default": "– Matt Z."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.social_proof_reviews",
+      "blocks": [
+        {
+          "type": "image-review",
+          "settings": {
+            "quote_text": "\"A product that is heart healthy AND tastes amazing.\"",
+            "attribution": "– Chris D."
+          }
+        },
+        {
+          "type": "text-review",
+          "settings": {
+            "star_rating": "4.5",
+            "quote_heading": "\"I actually feel better.\"",
+            "quote_body": "I never notice things like supplements and I didn't expect to with this either....I've been sleeping better, breathing better and feeling better overall and it's only been a month so far.\"",
+            "attribution": "– Matt Z."
+          }
+        },
+        {
+          "type": "image-review",
+          "settings": {
+            "quote_text": "\"Humann fits so easily into my routine. I love it.\"",
+            "attribution": "– Leonna M."
+          }
+        },
+        {
+          "type": "text-review",
+          "settings": {
+            "star_rating": "4.5",
+            "quote_heading": "\"My doctor is very happy.\"",
+            "quote_body": "Ever since I started taking SuperBeets my doctor is very satisfied with my BP readings.\"",
+            "attribution": "– Everett"
+          }
+        },
+        {
+          "type": "image-review",
+          "settings": {
+            "quote_text": "\"I like that it feels practical, not complicated.\"",
+            "attribution": "– Kim K."
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

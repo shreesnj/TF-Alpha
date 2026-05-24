@@ -438,7 +438,10 @@
     "hero_carousel": "Hero carousel",
     "content_slide": "Content slide",
     "image_slide": "Image slide",
-    "ask_me": "Ask me"
+    "ask_me": "Ask me",
+    "social_proof_reviews": "Social proof reviews",
+    "image_review": "Image review",
+    "text_review": "Text review"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1188,7 +1191,14 @@
     "expert_image": "Expert image",
     "expert_title": "Expert title",
     "expert_description": "Expert description",
-    "show_badge": "Show badge"
+    "show_badge": "Show badge",
+    "star_rating": "Star rating",
+    "review_count_text": "Review count",
+    "card_gap": "Card gap",
+    "quote_text": "Quote",
+    "quote_heading": "Quote heading",
+    "quote_body": "Quote body",
+    "attribution": "Attribution"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

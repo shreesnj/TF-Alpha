@@ -1,0 +1,45 @@
+{% doc %}
+  Star Rating Component
+
+  Renders a star rating using inline SVG icons.
+
+  @param {Number} rating - Rating value from 0 to 5, supports 0.5 increments (default: 5)
+  @param {String} color - CSS color value for the stars (default: 'currentColor')
+  @param {Number} size - Icon size in pixels (default: 20)
+
+  @example
+    {% render 'star-rating', rating: 4.5, color: '#BC0F0F', size: 20 %}
+{% enddoc %}
+
+{%- liquid
+  assign rating = rating | default: 5
+  assign color = color | default: 'currentColor'
+  assign size = size | default: 20
+
+  assign full_stars = rating | floor
+  assign has_half = false
+  assign decimal = rating | minus: full_stars
+  if decimal > 0
+    assign has_half = true
+  endif
+  assign half_star_index = full_stars | plus: 1
+-%}
+
+<span
+  class="star-rating"
+  style="--star-color: {{ color }}; --star-size: {{ size }}px;"
+  role="img"
+  aria-label="{{ rating }} out of 5 stars"
+>
+  {%- for i in (1..5) -%}
+    {%- if i <= full_stars -%}
+      <span class="star-rating__icon">
+        {{ 'star-solid.svg' | inline_asset_content }}
+      </span>
+    {%- elsif has_half and i == half_star_index -%}
+      <span class="star-rating__icon">
+        {{ 'star-half-solid.svg' | inline_asset_content }}
+      </span>
+    {%- endif -%}
+  {%- endfor -%}
+</span>

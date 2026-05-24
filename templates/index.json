@@ -255,11 +255,76 @@
         "padding-block-start": 8,
         "padding-block-end": 16
       }
+    },
+    "social_proof_reviews": {
+      "type": "social-proof-reviews",
+      "settings": {
+        "heading": "Join <strong>millions of people</strong> prioritizing their cardiovascular health",
+        "star_rating": "4.5",
+        "review_count_text": "100K+ verified reviews",
+        "color_scheme": "scheme-2",
+        "section_width": "full-width",
+        "card_gap": 20,
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": {
+        "image_review_1": {
+          "type": "image-review",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31613818.jpg",
+            "quote_text": "\"A product that is heart healthy AND tastes amazing.\"",
+            "attribution": "– Chris D."
+          }
+        },
+        "text_review_1": {
+          "type": "text-review",
+          "settings": {
+            "star_rating": "4.5",
+            "quote_heading": "\"I actually feel better.\"",
+            "quote_body": "I never notice things like supplements and I didn't expect to with this either....I've been sleeping better, breathing better and feeling better overall and it's only been a month so far.\"",
+            "attribution": "– Matt Z."
+          }
+        },
+        "image_review_2": {
+          "type": "image-review",
+          "settings": {
+            "image": "shopify://shop_images/card-desktop-31731695.jpg",
+            "quote_text": "\"Humann fits so easily into my routine. I love it.\"",
+            "attribution": "– Leonna M."
+          }
+        },
+        "text_review_2": {
+          "type": "text-review",
+          "settings": {
+            "star_rating": "4.5",
+            "quote_heading": "\"My doctor is very happy.\"",
+            "quote_body": "Ever since I started taking SuperBeets my doctor is very satisfied with my BP readings.\"",
+            "attribution": "– Everett"
+          }
+        },
+        "image_review_3": {
+          "type": "image-review",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31613853.jpg",
+            "quote_text": "\"I like that it feels practical, not complicated.\"",
+            "attribution": "– Kim K."
+          }
+        }
+      },
+      "block_order": [
+        "image_review_1",
+        "text_review_1",
+        "image_review_2",
+        "text_review_2",
+        "image_review_3"
+      ]
     }
   },
   "order": [
     "hero_carousel",
     "product_list_fa6P9H",
-    "ask_me"
+    "ask_me",
+    "social_proof_reviews"
   ]
 }
