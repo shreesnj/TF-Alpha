@@ -1,0 +1,470 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="science-deep-dive spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- if section.settings.heading != blank -%}
+      <div class="science-deep-dive__heading">{{ section.settings.heading }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <div class="science-deep-dive__subtitle">{{ section.settings.subtitle }}</div>
+    {%- endif -%}
+
+    <hr class="science-deep-dive__divider">
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="science-deep-dive__carousel">
+        {%- for block in section.blocks -%}
+          <div class="science-deep-dive__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                class="science-deep-dive__card-bg"
+                src="{{ block.settings.image | image_url: width: 768 }}"
+                srcset="
+                  {{ block.settings.image | image_url: width: 375 }} 375w,
+                  {{ block.settings.image | image_url: width: 550 }} 550w,
+                  {{ block.settings.image | image_url: width: 768 }} 768w
+                "
+                sizes="(min-width: 990px) 33vw, 320px"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+
+            <div class="science-deep-dive__card-content">
+              {%- case block.settings.icon_style -%}
+                {%- when 'molecule-simple' -%}
+                  <svg class="science-deep-dive__card-icon" viewBox="0 0 161 161" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <circle cx="80.5" cy="80.5" r="80" stroke="white" stroke-width="0.5"/>
+                    <circle cx="52" cy="56" r="5" fill="white"/>
+                    <circle cx="64" cy="80" r="5" fill="white"/>
+                    <circle cx="42" cy="96" r="9" fill="white"/>
+                    <circle cx="82" cy="90" r="4.5" fill="white"/>
+                  </svg>
+
+                {%- when 'molecule-complex' -%}
+                  <svg class="science-deep-dive__card-icon" viewBox="0 0 169 169" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <circle cx="84.5" cy="84.5" r="84" stroke="white" stroke-width="0.5"/>
+                    <circle cx="84.5" cy="84.5" r="62.5" stroke="white" stroke-width="1"/>
+                    <g stroke="white" stroke-width="1" fill="none">
+                      <g transform="rotate(0,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(30,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(60,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(90,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(120,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(150,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(180,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(210,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(240,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(270,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(300,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                      <g transform="rotate(330,84.5,84.5)"><line x1="84.5" y1="22" x2="84.5" y2="3"/><polyline points="81.5,7 84.5,3 87.5,7"/></g>
+                    </g>
+                    <circle cx="76" cy="68" r="5" fill="white"/>
+                    <circle cx="96" cy="78" r="5" fill="white"/>
+                    <circle cx="80" cy="98" r="5" fill="white"/>
+                    <circle cx="70" cy="86" r="3" fill="white"/>
+                    <circle cx="98" cy="92" r="3" fill="white"/>
+                    <circle cx="86" cy="76" r="3" fill="white"/>
+                  </svg>
+
+                {%- when 'molecule-cluster' -%}
+                  <svg class="science-deep-dive__card-icon" viewBox="0 0 169 169" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <circle cx="84.5" cy="84.5" r="84" stroke="white" stroke-width="0.5"/>
+                    <circle cx="105" cy="48" r="9" fill="white"/>
+                    <circle cx="55" cy="85" r="9" fill="white"/>
+                    <circle cx="112" cy="105" r="9" fill="white"/>
+                    <circle cx="78" cy="120" r="7" fill="white"/>
+                    <circle cx="72" cy="55" r="5" fill="white"/>
+                    <circle cx="100" cy="75" r="5" fill="white"/>
+                    <circle cx="62" cy="68" r="5" fill="white"/>
+                    <circle cx="95" cy="118" r="5" fill="white"/>
+                    <circle cx="120" cy="80" r="5" fill="white"/>
+                    <circle cx="128" cy="66" r="4.5" fill="white"/>
+                    <circle cx="82" cy="98" r="4.5" fill="white"/>
+                    <circle cx="90" cy="40" r="3" fill="white"/>
+                    <circle cx="48" cy="72" r="3" fill="white"/>
+                    <circle cx="118" cy="95" r="3" fill="white"/>
+                    <circle cx="68" cy="112" r="3" fill="white"/>
+                    <circle cx="102" cy="132" r="3" fill="white"/>
+                    <circle cx="130" cy="98" r="3" fill="white"/>
+                    <circle cx="76" cy="76" r="3" fill="white"/>
+                    <circle cx="92" cy="62" r="3" fill="white"/>
+                  </svg>
+              {%- endcase -%}
+
+              {%- if block.settings.card_text != blank -%}
+                <div class="science-deep-dive__card-text">{{ block.settings.card_text }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <hr class="science-deep-dive__divider">
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="science-deep-dive__button-wrapper">
+        <a
+          class="science-deep-dive__button"
+          {% if section.settings.button_url != blank %}href="{{ section.settings.button_url }}"{% endif %}
+        >
+          {{- section.settings.button_text | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .science-deep-dive {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-inline: 16px;
+  }
+
+  .science-deep-dive__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    color: var(--color-foreground);
+  }
+
+  .science-deep-dive__heading p {
+    margin: 0;
+  }
+
+  .science-deep-dive__heading strong {
+    font-weight: 700;
+  }
+
+  .science-deep-dive__subtitle {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--color-foreground);
+  }
+
+  .science-deep-dive__subtitle p {
+    margin: 0;
+  }
+
+  .science-deep-dive__subtitle strong {
+    font-weight: 700;
+  }
+
+  .science-deep-dive__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0;
+    width: 100%;
+  }
+
+  .science-deep-dive__carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .science-deep-dive__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .science-deep-dive__card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 480px;
+    flex: 0 0 auto;
+    width: 320px;
+    scroll-snap-align: start;
+  }
+
+  .science-deep-dive__card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .science-deep-dive__card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 24px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .science-deep-dive__card-icon {
+    width: 161px;
+    height: 161px;
+    flex-shrink: 0;
+  }
+
+  .science-deep-dive__card-text {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -1px;
+    text-align: center;
+    color: var(--color-foreground);
+  }
+
+  .science-deep-dive__card-text p {
+    margin: 0;
+  }
+
+  .science-deep-dive__card-text strong {
+    font-weight: 700;
+  }
+
+  .science-deep-dive__button-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .science-deep-dive__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 28px;
+    border: 2px solid currentColor;
+    background: transparent;
+    color: var(--color-foreground);
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .science-deep-dive__button:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (min-width: 990px) {
+    .science-deep-dive {
+      gap: 20px;
+      padding-inline: 0;
+    }
+
+    .science-deep-dive__heading {
+      font-family: var(--font-subheading--family);
+      font-style: var(--font-subheading--style);
+      font-weight: 500;
+      line-height: 52px;
+      letter-spacing: 0;
+    }
+
+    .science-deep-dive__heading strong {
+      font-family: var(--font-heading--family);
+      font-style: var(--font-heading--style);
+    }
+
+    .science-deep-dive__subtitle {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .science-deep-dive__carousel {
+      overflow-x: visible;
+      scroll-snap-type: none;
+    }
+
+    .science-deep-dive__card {
+      flex: 1;
+      width: auto;
+      scroll-snap-align: initial;
+    }
+
+    .science-deep-dive__card-icon {
+      width: 169px;
+      height: 169px;
+    }
+
+    .science-deep-dive__card-text {
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    .science-deep-dive__button {
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.science_deep_dive",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p>Learn about the<br><strong>Miracle Molecule</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "t:settings.subtitle",
+      "default": "<p>Science grounded in the <strong>Nobel Prize-winning</strong> nitric oxide pathway.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "Explore Our Science"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "science-card",
+      "name": "t:names.science_card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "richtext",
+          "id": "card_text",
+          "label": "t:settings.card_text"
+        },
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "t:settings.icon_style",
+          "options": [
+            { "value": "molecule-simple", "label": "t:options.molecule_simple" },
+            { "value": "molecule-complex", "label": "t:options.molecule_complex" },
+            { "value": "molecule-cluster", "label": "t:options.molecule_cluster" },
+            { "value": "none", "label": "t:options.none" }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "t:names.science_deep_dive",
+      "blocks": [
+        {
+          "type": "science-card",
+          "settings": {
+            "card_text": "<p>By age 40, Humans naturally produce <strong>50% less Nitric Oxide</strong> than they did at age 20.</p>",
+            "icon_style": "molecule-simple"
+          }
+        },
+        {
+          "type": "science-card",
+          "settings": {
+            "card_text": "<p>Nitric Oxide helps circulate more oxygen and nutrients to your <strong>36 trillion cells.</strong></p>",
+            "icon_style": "molecule-complex"
+          }
+        },
+        {
+          "type": "science-card",
+          "settings": {
+            "card_text": "<p>More oxygen and nutrients means <strong>more healthy energy support.</strong></p>",
+            "icon_style": "molecule-cluster"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

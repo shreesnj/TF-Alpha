@@ -453,7 +453,9 @@
     "one_routine": "One Routine",
     "product_item": "Product item",
     "backed_by": "Backed by",
-    "expert_card": "Expert card"
+    "expert_card": "Expert card",
+    "science_deep_dive": "Science deep dive",
+    "science_card": "Science card"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -765,7 +767,10 @@
     "wide": "Wide",
     "youtube": "YouTube",
     "with_hints": "With hints",
-    "below_media": "Below media"
+    "below_media": "Below media",
+    "molecule_simple": "Simple",
+    "molecule_complex": "Complex",
+    "molecule_cluster": "Cluster"
   },
   "settings": {
     "accordion": "Accordion",
@@ -1244,7 +1249,10 @@
     "video_url": "Video URL",
     "quote": "Quote",
     "credentials": "Credentials",
-    "name_label": "Name"
+    "name_label": "Name",
+    "subtitle": "Subtitle",
+    "icon_style": "Icon style",
+    "card_text": "Card text"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

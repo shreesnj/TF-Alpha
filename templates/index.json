@@ -504,6 +504,49 @@
         "or_item_3",
         "or_item_4"
       ]
+    },
+    "science_deep_dive": {
+      "type": "science-deep-dive",
+      "settings": {
+        "heading": "<p>The Science of <strong>Nitric Oxide<\/strong><\/p>",
+        "subtitle": "<p>Nitric oxide is your body’s natural signal for healthy blood flow. Here’s how it works.<\/p>",
+        "button_text": "Explore Our Science",
+        "color_scheme": "scheme-3",
+        "section_width": "page-width",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": {
+        "science_card_1": {
+          "type": "science-card",
+          "settings": {
+            "image": "shopify://shop_images/1-mobile-31613935.jpg",
+            "card_text": "<p><strong>Nitric oxide<\/strong> signals your blood vessels to <strong>relax and widen.<\/strong><\/p>",
+            "icon_style": "molecule-simple"
+          }
+        },
+        "science_card_2": {
+          "type": "science-card",
+          "settings": {
+            "image": "shopify://shop_images/2-mobile-31613943.jpg",
+            "card_text": "<p>This improves <strong>circulation<\/strong>, delivering oxygen and nutrients more efficiently.<\/p>",
+            "icon_style": "molecule-complex"
+          }
+        },
+        "science_card_3": {
+          "type": "science-card",
+          "settings": {
+            "image": "shopify://shop_images/3-mobile-31613972.jpg",
+            "card_text": "<p>Better blood flow supports <strong>heart health<\/strong>, energy, and overall vitality.<\/p>",
+            "icon_style": "molecule-cluster"
+          }
+        }
+      },
+      "block_order": [
+        "science_card_1",
+        "science_card_2",
+        "science_card_3"
+      ]
     }
   },
   "order": [
@@ -513,6 +556,7 @@
     "social_proof_reviews",
     "backed_by",
     "three_keys",
-    "one_routine"
+    "one_routine",
+    "science_deep_dive"
   ]
 }
