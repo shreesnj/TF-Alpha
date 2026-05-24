@@ -1,0 +1,563 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="ingredients spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <div class="ingredients__content">
+      {%- if section.settings.heading != blank -%}
+        <div class="ingredients__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <div class="ingredients__desktop-info">
+          <hr class="ingredients__divider">
+          <p class="ingredients__subtitle">
+            {{- section.settings.subtitle | escape }}
+            {%- if section.settings.about_link_text != blank -%}
+              {%- if section.settings.about_link_url != blank -%}
+                <a href="{{ section.settings.about_link_url }}" class="ingredients__about-link">{{ section.settings.about_link_text | escape }}</a>
+              {%- else -%}
+                <span class="ingredients__about-link">{{ section.settings.about_link_text | escape }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </p>
+          <hr class="ingredients__divider">
+          {%- if section.settings.button_text != blank -%}
+            <div class="ingredients__cta-desktop">
+              <a
+                {%- if section.settings.button_url != blank %} href="{{ section.settings.button_url }}"{% endif %}
+                class="ingredients__button"
+              >
+                {{- section.settings.button_text | escape -}}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="ingredients__badge">
+        <div class="ingredients__badge-left">
+          <img
+            src="{{ 'flag.svg' | asset_url }}"
+            alt=""
+            width="27"
+            height="17"
+            class="ingredients__flag"
+          >
+          {%- if section.settings.badge_text != blank -%}
+            <span class="ingredients__badge-text">{{ section.settings.badge_text | escape }}</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.badge_subtitle != blank -%}
+          <span class="ingredients__badge-subtitle">{{ section.settings.badge_subtitle | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ingredients__grid-wrapper">
+        <div class="ingredients__grid">
+          {%- for block in section.blocks -%}
+            <div class="ingredients__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 177 }} 177w,
+                    {{ block.settings.image | image_url: width: 185 }} 185w,
+                    {{ block.settings.image | image_url: width: 354 }} 354w,
+                    {{ block.settings.image | image_url: width: 370 }} 370w,
+                    {{ block.settings.image | image_url: width: 400 }} 400w
+                  "
+                  sizes="(min-width: 990px) 185px, calc(50vw - 18px)"
+                  alt="{{ block.settings.label | escape }}"
+                  class="ingredients__card-image"
+                  width="185"
+                  height="200"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="ingredients__card-placeholder"></div>
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}
+                <div class="ingredients__card-label-wrapper">
+                  <span class="ingredients__card-label">{{ block.settings.label | escape }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="ingredients__cta-mobile">
+        <a
+          {%- if section.settings.button_url != blank %} href="{{ section.settings.button_url }}"{% endif %}
+          class="ingredients__button ingredients__button--full"
+        >
+          {{- section.settings.button_text | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .ingredients__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .ingredients__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .ingredients__heading strong {
+    color: var(--color-foreground-heading);
+    font-weight: 400;
+  }
+
+  .ingredients__desktop-info {
+    display: none;
+  }
+
+  .ingredients__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0;
+    width: 100%;
+  }
+
+  .ingredients__subtitle {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .ingredients__about-link {
+    text-decoration: underline;
+    color: var(--color-foreground);
+  }
+
+  a.ingredients__about-link:hover {
+    opacity: 0.7;
+  }
+
+  .ingredients__cta-desktop {
+    padding-block: 16px;
+  }
+
+  .ingredients__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000000;
+    background: transparent;
+    border: 2px solid #000000;
+    border-radius: 28px;
+    padding: 12px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .ingredients__button:hover {
+    background: #000000;
+    color: #FFFFFF;
+  }
+
+  .ingredients__button--full {
+    width: 100%;
+  }
+
+  .ingredients__badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 34px;
+    padding: 12px 0;
+    border: 1px solid #D9D9DB;
+    width: 100%;
+  }
+
+  .ingredients__badge-left {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-inline: 8px;
+  }
+
+  .ingredients__flag {
+    display: block;
+    width: 27px;
+    height: 17px;
+  }
+
+  .ingredients__badge-text {
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+  }
+
+  .ingredients__badge-subtitle {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--color-foreground);
+  }
+
+  .ingredients__grid-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ingredients__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    padding: 8px 12px;
+  }
+
+  .ingredients__card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 177 / 200;
+  }
+
+  .ingredients__card:nth-child(n+7) {
+    display: none;
+  }
+
+  .ingredients__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ingredients__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-foreground);
+    opacity: 0.1;
+  }
+
+  .ingredients__card-label-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+  }
+
+  .ingredients__card-label {
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .ingredients__cta-mobile {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 990px) {
+    .ingredients {
+      flex-direction: row;
+      gap: 60px;
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    .ingredients__content {
+      flex: 0 0 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+    }
+
+    .ingredients__heading {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    .ingredients__desktop-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ingredients__badge {
+      display: none;
+    }
+
+    .ingredients__grid-wrapper {
+      flex: 0 0 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+    }
+
+    .ingredients__grid {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 0;
+    }
+
+    .ingredients__card {
+      aspect-ratio: 185 / 200;
+    }
+
+    .ingredients__card:nth-child(n+7) {
+      display: block;
+    }
+
+    .ingredients__card-label {
+      font-size: 16px;
+      line-height: 16px;
+    }
+
+    .ingredients__cta-mobile {
+      display: none;
+    }
+
+    .ingredients__button {
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.ingredients",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p>Made from clinically researched and <strong>sustainably sourced ingredients.</strong></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "t:settings.subtitle",
+      "default": "Made in the USA with carefully sourced ingredients from around the world. From source to formula, each ingredient is chosen with purpose."
+    },
+    {
+      "type": "text",
+      "id": "about_link_text",
+      "label": "t:settings.about_link_text",
+      "default": "About ingredients."
+    },
+    {
+      "type": "url",
+      "id": "about_link_url",
+      "label": "t:settings.about_link_url"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "SHOW ALL INGREDIENTS"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "t:settings.badge_text",
+      "default": "MADE IN USA"
+    },
+    {
+      "type": "text",
+      "id": "badge_subtitle",
+      "label": "t:settings.badge_subtitle",
+      "default": "with globally sourced  ingredients"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient-card",
+      "name": "t:names.ingredient_card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:settings.label",
+          "default": "Ingredient"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "t:names.ingredients",
+      "blocks": [
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Black Garlic"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Grape Seed Extract"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Beet Root"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Berberine"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Olive Fruit Extract"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Japanese Seaweed"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "French Cantaloupe"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "White Mulberry Leaf"
+          }
+        },
+        {
+          "type": "ingredient-card",
+          "settings": {
+            "label": "Coffee Fruit Extract"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

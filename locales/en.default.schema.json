@@ -459,6 +459,8 @@
     "science_card": "Science card",
     "impact": "Impact",
     "impact_card": "Impact card",
+    "ingredients": "Ingredients",
+    "ingredient_card": "Ingredient card",
     "money_back": "Money Back"
   },
   "options": {
@@ -1262,8 +1264,11 @@
     "badge_style": "Badge style",
     "cta_url": "CTA URL",
     "stat_text": "Stat text",
+    "about_link_text": "Link text",
+    "about_link_url": "Link URL",
     "background_image": "Background image",
     "background_image_mobile": "Background image (mobile)",
+    "badge_subtitle": "Badge subtitle",
     "body": "Body"
   },
   "text_defaults": {

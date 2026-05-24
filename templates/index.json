@@ -619,6 +619,97 @@
         "science_card_3"
       ]
     },
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {
+        "heading": "<p>Made from clinically researched and <strong>sustainably sourced ingredients.</strong></p>",
+        "subtitle": "Made in the USA with carefully sourced ingredients from around the world. From source to formula, each ingredient is chosen with purpose.",
+        "about_link_text": "About ingredients.",
+        "button_text": "SHOW ALL INGREDIENTS",
+        "badge_text": "MADE IN USA",
+        "badge_subtitle": "with globally sourced  ingredients",
+        "color_scheme": "scheme-2",
+        "section_width": "page-width",
+        "padding-block-start": 96,
+        "padding-block-end": 96
+      },
+      "blocks": {
+        "black_garlic": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614157.png",
+            "label": "Black Garlic"
+          }
+        },
+        "grape_seed_extract": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614158.png",
+            "label": "Grape Seed Extract"
+          }
+        },
+        "beet_root": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614159.jpg",
+            "label": "Beet Root"
+          }
+        },
+        "berberine": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614160.png",
+            "label": "Berberine"
+          }
+        },
+        "olive_fruit_extract": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614162.png",
+            "label": "Olive Fruit Extract"
+          }
+        },
+        "japanese_seaweed": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-mobile-31614161.png",
+            "label": "Japanese Seaweed"
+          }
+        },
+        "french_cantaloupe": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-desktop-31732135.jpg",
+            "label": "French Cantaloupe"
+          }
+        },
+        "white_mulberry_leaf": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-desktop-31732134.jpg",
+            "label": "White Mulberry Leaf"
+          }
+        },
+        "coffee_fruit_extract": {
+          "type": "ingredient-card",
+          "settings": {
+            "image": "shopify://shop_images/card-desktop-31732133.jpg",
+            "label": "Coffee Fruit Extract"
+          }
+        }
+      },
+      "block_order": [
+        "black_garlic",
+        "grape_seed_extract",
+        "beet_root",
+        "berberine",
+        "olive_fruit_extract",
+        "japanese_seaweed",
+        "french_cantaloupe",
+        "white_mulberry_leaf",
+        "coffee_fruit_extract"
+      ]
+    },
     "impact": {
       "type": "impact",
       "settings": {
@@ -677,6 +768,7 @@
     "three_keys",
     "one_routine",
     "science_deep_dive",
-    "impact"
+    "impact",
+    "ingredients"
   ]
 }
