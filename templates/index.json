@@ -618,6 +618,53 @@
         "science_card_2",
         "science_card_3"
       ]
+    },
+    "impact": {
+      "type": "impact",
+      "settings": {
+        "heading": "<p>One routine.<br><strong>Big impact.</strong></p>",
+        "stat_text": "35K daily active users",
+        "background_image": "shopify://shop_images/stat-mobile-31614101.jpg",
+        "background_image_mobile": "shopify://shop_images/stat-mobile-31614101.jpg",
+        "section_width": "full-width",
+        "color_scheme": "scheme-5",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": {
+        "impact_card_1": {
+          "type": "impact-card",
+          "settings": {
+            "label": "30 DAYS",
+            "body": "<p>You start building consistency as your routine becomes a part of your <strong>daily cardiovascular support.</strong></p>",
+            "benefit_1": "Supports nitric oxide levels",
+            "benefit_2": "Promotes healthy blood flow"
+          }
+        },
+        "impact_card_2": {
+          "type": "impact-card",
+          "settings": {
+            "label": "60 DAYS",
+            "body": "<p>You feel the routine take hold as you continue <strong>supporting nitric oxide,</strong> blood flow, and overall cardiovascular health.</p>",
+            "benefit_1": "Enhanced daily energy",
+            "benefit_2": "Supports cardiovascular vitality"
+          }
+        },
+        "impact_card_3": {
+          "type": "impact-card",
+          "settings": {
+            "label": "90 DAYS",
+            "body": "<p>Support becomes part of <strong>your daily rhythm</strong>, with habits and benefits working together over time</p>",
+            "benefit_1": "Optimized blood pressure",
+            "benefit_2": "Long-term cardiovascular support"
+          }
+        }
+      },
+      "block_order": [
+        "impact_card_1",
+        "impact_card_2",
+        "impact_card_3"
+      ]
     }
   },
   "order": [
@@ -629,6 +676,7 @@
     "backed_by",
     "three_keys",
     "one_routine",
-    "science_deep_dive"
+    "science_deep_dive",
+    "impact"
   ]
 }

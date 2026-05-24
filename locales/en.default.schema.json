@@ -456,7 +456,9 @@
     "backed_by": "Backed by",
     "expert_card": "Expert card",
     "science_deep_dive": "Science deep dive",
-    "science_card": "Science card"
+    "science_card": "Science card",
+    "impact": "Impact",
+    "impact_card": "Impact card"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1257,7 +1259,11 @@
     "card_text": "Card text",
     "badge_text": "Badge text",
     "badge_style": "Badge style",
-    "cta_url": "CTA URL"
+    "cta_url": "CTA URL",
+    "stat_text": "Stat text",
+    "background_image": "Background image",
+    "background_image_mobile": "Background image (mobile)",
+    "body": "Body"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
