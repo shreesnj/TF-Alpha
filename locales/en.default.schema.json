@@ -943,6 +943,7 @@
     "line_height": "Line height",
     "link": "Link",
     "custom_link": "Custom link",
+    "custom_link_text": "Custom link text",
     "link_preset": "Link preset",
     "links": "Links",
     "logo": "Logo",

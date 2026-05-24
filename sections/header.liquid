@@ -1111,6 +1111,67 @@
     font-family: var(--menu-localization-font);
     font-size: var(--menu-localization-font-size);
   }
+
+  /* Custom overrides for Figma design alignment */
+  .header__row--top {
+    --header-padding: 1rem;
+  }
+
+  .header .header__column--left {
+    gap: 36px;
+  }
+
+  .header .menu-list {
+    --menu-horizontal-gap: 28px;
+  }
+
+  .header .menu-list__link-title {
+    letter-spacing: -0.5px;
+  }
+
+  .header-actions--text .header-actions__text-style {
+    letter-spacing: 0.75px;
+  }
+
+  .header .header-actions__custom-action {
+    letter-spacing: 0.75px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header .header__columns {
+      padding: 16px 20px;
+    }
+
+    header-actions {
+      gap: 16px;
+    }
+
+    .header-actions__action svg,
+    .header-actions__action .svg-wrapper svg {
+      color: #767676;
+    }
+
+    .header__icon--menu {
+      color: #767676;
+    }
+  }
+
+  #header-component[data-menu-style='drawer'] .header__columns {
+    padding: 16px 20px;
+  }
+
+  #header-component[data-menu-style='drawer'] header-actions {
+    gap: 16px;
+  }
+
+  #header-component[data-menu-style='drawer'] .header-actions__action svg,
+  #header-component[data-menu-style='drawer'] .header-actions__action .svg-wrapper svg {
+    color: #767676;
+  }
+
+  #header-component[data-menu-style='drawer'] .header__icon--menu {
+    color: #767676;
+  }
 {% endstylesheet %}
 
 {% unless request.design_mode %}
@@ -1541,6 +1602,16 @@
       ],
       "default": "none",
       "visible_if": "{{ section.settings.actions_display_style == 'text' }}"
+    },
+    {
+      "type": "text",
+      "id": "custom_action_text",
+      "label": "t:settings.custom_link_text"
+    },
+    {
+      "type": "url",
+      "id": "custom_action_url",
+      "label": "t:settings.custom_link"
     },
     {
       "type": "header",
