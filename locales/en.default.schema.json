@@ -437,7 +437,8 @@
     "comparison_slider": "Comparison slider",
     "hero_carousel": "Hero carousel",
     "content_slide": "Content slide",
-    "image_slide": "Image slide"
+    "image_slide": "Image slide",
+    "ask_me": "Ask me"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1180,7 +1181,14 @@
     "x_position": "Horizontal position",
     "y_position": "Vertical position",
     "cta_text": "CTA text",
-    "mobile_background": "Mobile background"
+    "mobile_background": "Mobile background",
+    "placeholder_text": "Placeholder text",
+    "search_url": "Search URL",
+    "button_text": "Button text",
+    "expert_image": "Expert image",
+    "expert_title": "Expert title",
+    "expert_description": "Expert description",
+    "show_badge": "Show badge"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
