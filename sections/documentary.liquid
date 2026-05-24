@@ -1,0 +1,353 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    id="documentary-{{ section.id }}"
+    class="documentary spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- assign desktop_image = section.settings.background_image -%}
+    {%- assign mobile_image = section.settings.background_image_mobile -%}
+
+    {%- if desktop_image != blank or mobile_image != blank or section.settings.background_video != blank -%}
+      <div class="documentary__bg">
+        <picture>
+          {%- if desktop_image != blank -%}
+            <source
+              media="(min-width: 750px)"
+              srcset="{{ desktop_image | image_url: width: desktop_image.width }}"
+            >
+          {%- endif -%}
+          {%- assign fallback_image = mobile_image | default: desktop_image -%}
+          {%- if fallback_image != blank -%}
+            <img
+              src="{{ fallback_image | image_url: width: fallback_image.width }}"
+              alt="{{ fallback_image.alt | default: '' | escape }}"
+              width="{{ fallback_image.width }}"
+              height="{{ fallback_image.height }}"
+              loading="lazy"
+              class="documentary__bg-image"
+            >
+          {%- endif -%}
+        </picture>
+
+        {%- if section.settings.background_video != blank -%}
+          {{
+            section.settings.background_video
+            | video_tag:
+              autoplay: true,
+              muted: true,
+              loop: true,
+              playsinline: true,
+              class: 'documentary__bg-video'
+          }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="documentary__overlay"></div>
+
+    <div class="documentary__content">
+      <img
+        src="{{ 'humann-ut-logo-white-1.svg' | asset_url }}"
+        alt="Humann and University of Texas logo"
+        width="264"
+        height="47"
+        loading="lazy"
+        class="documentary__logo"
+      >
+
+      {%- if section.settings.heading != blank -%}
+        <div class="documentary__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a
+          {%- if section.settings.button_url != blank %}
+            href="{{ section.settings.button_url }}"
+          {%- endif %}
+          class="documentary__button"
+        >
+          {{- section.settings.button_text | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.background_video != blank -%}
+      <button
+        type="button"
+        class="documentary__pause-btn"
+        aria-label="Pause video"
+      >
+        <img
+          src="{{ 'icon-button.svg' | asset_url }}"
+          alt=""
+          width="32"
+          height="32"
+          loading="lazy"
+        >
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if section.settings.background_video != blank -%}
+  <script>
+    (function () {
+      var section = document.getElementById('documentary-{{ section.id }}');
+      if (!section) return;
+
+      var video = section.querySelector('.documentary__bg-video');
+      var btn = section.querySelector('.documentary__pause-btn');
+      if (!video || !btn) return;
+
+      btn.addEventListener('click', function () {
+        if (video.paused) {
+          video.play();
+          section.classList.remove('documentary--paused');
+          btn.setAttribute('aria-label', 'Pause video');
+        } else {
+          video.pause();
+          section.classList.add('documentary--paused');
+          btn.setAttribute('aria-label', 'Play video');
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+.documentary {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0;
+}
+
+.documentary__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.documentary__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.documentary__bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.documentary__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.documentary__content {
+  position: relative;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 72px;
+  padding: 0 160px;
+  min-height: 620px;
+}
+
+.documentary__logo {
+  width: 264px;
+  height: 47px;
+  object-fit: contain;
+}
+
+.documentary__heading {
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+  letter-spacing: -1px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.documentary__heading strong {
+  font-weight: 700;
+}
+
+.documentary__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  border-radius: 28px;
+  padding: 12px 20px;
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.documentary__button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.documentary__pause-btn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  z-index: 3;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+.documentary__pause-btn img {
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (min-width: 990px) {
+  .documentary__content {
+    display: flex;
+  }
+
+  .documentary__pause-btn {
+    display: block;
+    top: 16px;
+    inset-inline-end: 16px;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .documentary__button {
+    transition: none;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.documentary",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:settings.background_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "t:settings.background_image_mobile"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "t:settings.video"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p>Founded in partnership with<br><strong>The University of Texas</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "WATCH DOCUMENTARY"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-5"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.documentary",
+      "settings": {
+        "heading": "<p>Founded in partnership with<br><strong>The University of Texas</strong></p>",
+        "button_text": "WATCH DOCUMENTARY",
+        "section_width": "full-width",
+        "color_scheme": "scheme-5",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  ]
+}
+{% endschema %}

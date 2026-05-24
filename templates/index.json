@@ -757,6 +757,19 @@
         "impact_card_3"
       ]
     },
+    "documentary": {
+      "type": "documentary",
+      "settings": {
+        "background_image": "shopify://shop_images/screenshot-2026-04-21-at-14-05-42-1-mobile-31614205.png",
+        "background_image_mobile": "shopify://shop_images/screenshot-2026-04-21-at-14-05-42-1-mobile-31614205.png",
+        "heading": "<p>Founded in partnership with<br><strong>The University of Texas</strong></p>",
+        "button_text": "WATCH DOCUMENTARY",
+        "section_width": "full-width",
+        "color_scheme": "scheme-5",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "learn": {
       "type": "learn",
       "settings": {
@@ -859,6 +872,7 @@
     "one_routine",
     "science_deep_dive",
     "impact",
+    "documentary",
     "ingredients",
     "learn"
   ]
