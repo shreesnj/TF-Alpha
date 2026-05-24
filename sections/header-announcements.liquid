@@ -9,7 +9,7 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <aside
   class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
+  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.mobile_background != blank %} --mobile-bg: {{ section.settings.mobile_background }};{% endif %}"
 >
   {% liquid
     assign autoplay = false
@@ -119,6 +119,25 @@
     position: absolute;
     inset: 0;
   }
+
+  @media screen and (max-width: 749px) {
+    .announcement-bar[style*='--mobile-bg'] {
+      background-color: var(--mobile-bg);
+    }
+
+    .announcement-bar.spacing-style {
+      padding: 8px 16px;
+    }
+
+    .announcement-bar {
+      overflow: hidden;
+    }
+
+    .announcement-bar__slides {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -167,6 +186,11 @@
       "id": "color_scheme",
       "default": "scheme-4",
       "label": "t:settings.color_scheme"
+    },
+    {
+      "type": "color",
+      "id": "mobile_background",
+      "label": "t:settings.mobile_background"
     },
     {
       "type": "range",
