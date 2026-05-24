@@ -1,0 +1,360 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="company spacing-style"
+    style="--company-text-color: {{ section.settings.text_color }};{% render 'spacing-style', settings: section.settings %}"
+  >
+    <div class="company__logo">
+      <img
+        src="{{ 'logo.svg' | asset_url }}"
+        alt="humann"
+        width="280"
+        height="48"
+        loading="lazy"
+        class="company__logo-img"
+      >
+    </div>
+
+    <div class="company__text-flow">
+      {%- liquid
+        assign words_1 = section.settings.text_segment_1 | split: ' '
+        for word in words_1
+          echo '<span class="company__word">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+
+      {%- if section.settings.icon_1 != blank -%}
+        <span class="company__icon company__icon--chew">
+          <img
+            src="{{ section.settings.icon_1 | image_url: width: 56 }}"
+            alt=""
+            loading="lazy"
+            class="company__icon-img"
+          >
+        </span>
+      {%- endif -%}
+
+      {%- liquid
+        assign words_2 = section.settings.text_segment_2 | split: ' '
+        for word in words_2
+          echo '<span class="company__word">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+
+      {%- liquid
+        assign bold_words_1 = section.settings.bold_segment_1 | split: ' '
+        for word in bold_words_1
+          echo '<span class="company__word company__word--bold">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+
+      {%- liquid
+        assign words_3 = section.settings.text_segment_3 | split: ' '
+        for word in words_3
+          echo '<span class="company__word">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+
+      {%- if section.settings.icon_2 != blank -%}
+        <span class="company__icon company__icon--capsule">
+          <img
+            src="{{ section.settings.icon_2 | image_url: width: 88 }}"
+            alt=""
+            loading="lazy"
+            class="company__icon-img"
+          >
+        </span>
+      {%- endif -%}
+
+      {%- liquid
+        assign words_4 = section.settings.text_segment_4 | split: ' '
+        for word in words_4
+          echo '<span class="company__word">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+
+      {%- if section.settings.icon_3 != blank -%}
+        <span class="company__icon company__icon--gummie">
+          <img
+            src="{{ section.settings.icon_3 | image_url: width: 50 }}"
+            alt=""
+            loading="lazy"
+            class="company__icon-img"
+          >
+        </span>
+      {%- endif -%}
+
+      {%- liquid
+        assign bold_words_2 = section.settings.bold_segment_2 | split: ' '
+        for word in bold_words_2
+          echo '<span class="company__word company__word--bold">'
+          echo word
+          echo '</span>'
+        endfor
+      -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .company {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    border: 1px solid #D9D9DB;
+  }
+
+  .company__logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .company__logo-img {
+    width: 280px;
+    height: auto;
+    display: block;
+  }
+
+  .company__text-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 20px;
+  }
+
+  .company__word {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    color: var(--company-text-color, #BC0F0F);
+  }
+
+  .company__word--bold {
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .company__icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .company__icon-img {
+    display: block;
+    object-fit: contain;
+  }
+
+  .company__icon--chew {
+    padding: 5px 2px 0 2px;
+  }
+
+  .company__icon--chew .company__icon-img {
+    width: 28px;
+    height: 21px;
+  }
+
+  .company__icon--capsule {
+    padding: 10px 0 0 0;
+  }
+
+  .company__icon--capsule .company__icon-img {
+    width: 44px;
+    height: 15px;
+    transform: rotate(1.6deg);
+  }
+
+  .company__icon--gummie {
+    padding: 3px 2px 0 2px;
+  }
+
+  .company__icon--gummie .company__icon-img {
+    width: 23px;
+    height: 25px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .company {
+      gap: 48px;
+    }
+
+    .company__text-flow {
+      gap: 3px;
+      max-width: 780px;
+      padding-inline: 0;
+    }
+
+    .company__word {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .company__icon--chew {
+      padding: 3px 4px 0 4px;
+    }
+
+    .company__icon--capsule {
+      padding: 8px 4px 0 4px;
+    }
+
+    .company__icon--gummie {
+      padding: 2px 2px 0 2px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.company",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text_segment_1",
+      "label": "t:settings.text_segment_1",
+      "default": "A cardiovascular health company"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "t:settings.icon_1"
+    },
+    {
+      "type": "text",
+      "id": "text_segment_2",
+      "label": "t:settings.text_segment_2",
+      "default": "focused on the"
+    },
+    {
+      "type": "text",
+      "id": "bold_segment_1",
+      "label": "t:settings.bold_segment_1",
+      "default": "60,000 miles"
+    },
+    {
+      "type": "text",
+      "id": "text_segment_3",
+      "label": "t:settings.text_segment_3",
+      "default": "of your cardiovascular system"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "t:settings.icon_2"
+    },
+    {
+      "type": "text",
+      "id": "text_segment_4",
+      "label": "t:settings.text_segment_4",
+      "default": "fueling your"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "t:settings.icon_3"
+    },
+    {
+      "type": "text",
+      "id": "bold_segment_2",
+      "label": "t:settings.bold_segment_2",
+      "default": "36 trillion cells."
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "default": "#BC0F0F"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.company",
+      "settings": {
+        "text_segment_1": "A cardiovascular health company",
+        "text_segment_2": "focused on the",
+        "bold_segment_1": "60,000 miles",
+        "text_segment_3": "of your cardiovascular system",
+        "text_segment_4": "fueling your",
+        "bold_segment_2": "36 trillion cells.",
+        "text_color": "#BC0F0F",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
