@@ -461,7 +461,10 @@
     "impact_card": "Impact card",
     "ingredients": "Ingredients",
     "ingredient_card": "Ingredient card",
-    "money_back": "Money Back"
+    "money_back": "Money Back",
+    "learn": "Learn",
+    "video_card": "Video card",
+    "article_card": "Article card"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1269,7 +1272,11 @@
     "background_image": "Background image",
     "background_image_mobile": "Background image (mobile)",
     "badge_subtitle": "Badge subtitle",
-    "body": "Body"
+    "body": "Body",
+    "watch_title": "Watch title",
+    "articles_title": "Articles title",
+    "category": "Category",
+    "read_time": "Read time"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
