@@ -1,0 +1,130 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="money-back spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- for i in (1..10) -%}
+      {%- if i > 1 -%}
+        <span class="money-back__divider" aria-hidden="true"></span>
+      {%- endif -%}
+      <span class="money-back__text">{{ section.settings.text | escape }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.money-back {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  background-color: #414141;
+}
+
+.money-back__text {
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.money-back__divider {
+  display: inline-block;
+  width: 80px;
+  height: 0;
+  border-top: 1px solid #F5F5F5;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .money-back {
+    gap: 32px;
+  }
+
+  .money-back__text {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.money_back",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:settings.text",
+      "default": "Money Back Guarantee"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.money_back"
+    }
+  ]
+}
+{% endschema %}
