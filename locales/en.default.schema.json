@@ -459,6 +459,7 @@
     "science_card": "Science card",
     "impact": "Impact",
     "impact_card": "Impact card",
+    "community": "Community",
     "documentary": "Documentary",
     "ingredients": "Ingredients",
     "ingredient_card": "Ingredient card",
@@ -1168,6 +1169,7 @@
     // Label for dropdown to select type/category
     "type": "Type",
     "type_preset": "Text preset",
+    "username": "Username",
     "underline_thickness": "Underline thickness",
     // Measurement unit selector (pixel vs percent)
     "unit": "Unit",
@@ -1256,6 +1258,7 @@
     "sale_price": "Sale price",
     "description": "Description",
     "subheading": "Subheading",
+    "show_divider": "Show divider",
     "show_dividers": "Show dividers",
     "video_url": "Video URL",
     "quote": "Quote",
@@ -1267,6 +1270,8 @@
     "badge_text": "Badge text",
     "badge_style": "Badge style",
     "cta_url": "CTA URL",
+    "stat_label": "Stat label",
+    "stat_number": "Stat number",
     "stat_text": "Stat text",
     "about_link_text": "Link text",
     "about_link_url": "Link URL",
