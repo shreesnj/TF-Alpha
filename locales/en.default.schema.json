@@ -434,7 +434,10 @@
     "video_section": "Video",
     "view_all_button": "View all",
     "pills": "Pills",
-    "comparison_slider": "Comparison slider"
+    "comparison_slider": "Comparison slider",
+    "hero_carousel": "Hero carousel",
+    "content_slide": "Content slide",
+    "image_slide": "Image slide"
   },
   "options": {
     "above_carousel": "Above carousel",
