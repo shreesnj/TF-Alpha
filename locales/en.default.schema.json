@@ -151,7 +151,13 @@
     "width": "Width",
     "width_is_automatically_optimized": "Width is automatically optimized for mobile.",
     "app_required_for_ratings": "An app is required for product ratings. [Learn more](https://help.shopify.com/manual/apps)",
-    "navigation": "Navigation"
+    "navigation": "Navigation",
+    "hero": "Hero",
+    "badges": "Badges",
+    "endorsement": "Endorsement",
+    "pricing": "Pricing",
+    "benefits": "Benefits",
+    "claims": "Claims"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -443,7 +449,9 @@
     "image_review": "Image review",
     "text_review": "Text review",
     "three_keys": "Three keys",
-    "key_card": "Key card"
+    "key_card": "Key card",
+    "one_routine": "One Routine",
+    "product_item": "Product item"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1200,7 +1208,35 @@
     "quote_text": "Quote",
     "quote_heading": "Quote heading",
     "quote_body": "Quote body",
-    "attribution": "Attribution"
+    "attribution": "Attribution",
+    "label_text": "Label text",
+    "hero_image": "Hero image",
+    "hero_image_mobile": "Mobile hero image",
+    "badge_1_text": "Badge 1 text",
+    "badge_1_color": "Badge 1 color",
+    "badge_2_text": "Badge 2 text",
+    "badge_2_color": "Badge 2 color",
+    "badge_3_text": "Badge 3 text",
+    "badge_3_color": "Badge 3 color",
+    "doctor_image": "Doctor image",
+    "doctor_text": "Doctor text",
+    "total_label": "Total label",
+    "total_original_price": "Original price",
+    "total_sale_price": "Sale price",
+    "benefit_1": "Benefit 1",
+    "benefit_2": "Benefit 2",
+    "benefit_3": "Benefit 3",
+    "button_url": "Button URL",
+    "button_color": "Button color",
+    "claim_image": "Claim image",
+    "claim_text": "Claim text",
+    "claim_link_text": "Claim link text",
+    "claim_link_url": "Claim link URL",
+    "dot_color": "Dot color",
+    "show_dot": "Show dot",
+    "original_price": "Original price",
+    "sale_price": "Sale price",
+    "description": "Description"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

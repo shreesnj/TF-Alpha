@@ -1,0 +1,1085 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="one-routine spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <div class="one-routine__layout">
+      <div class="one-routine__col one-routine__col--left">
+        {%- if section.settings.label_text != blank -%}
+          <span class="one-routine__label">{{ section.settings.label_text | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <div class="one-routine__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+
+        <div class="one-routine__endorsement">
+          <div class="one-routine__endorsement-avatar">
+            {%- if section.settings.doctor_image != blank -%}
+              <img
+                src="{{ section.settings.doctor_image | image_url: width: 96 }}"
+                alt="{{ section.settings.doctor_image.alt | default: '' | escape }}"
+                width="48"
+                height="48"
+                loading="lazy"
+                class="one-routine__endorsement-photo"
+              >
+            {%- endif -%}
+            <span class="one-routine__endorsement-check">
+              <img
+                src="{{ 'check-solid-2.svg' | asset_url }}"
+                alt=""
+                width="8"
+                height="8"
+                loading="lazy"
+              >
+            </span>
+          </div>
+          {%- if section.settings.doctor_text != blank -%}
+            <div class="one-routine__endorsement-text">
+              {{ section.settings.doctor_text | escape }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.hero_image != blank or section.settings.hero_image_mobile != blank -%}
+          <div class="one-routine__hero">
+            <picture>
+              {%- if section.settings.hero_image != blank -%}
+                <source
+                  media="(min-width: 750px)"
+                  srcset="{{ section.settings.hero_image | image_url: width: section.settings.hero_image.width }}"
+                >
+              {%- endif -%}
+              {%- assign fallback_image = section.settings.hero_image_mobile | default: section.settings.hero_image -%}
+              {%- if fallback_image != blank -%}
+                <img
+                  src="{{ fallback_image | image_url: width: fallback_image.width }}"
+                  alt="{{ fallback_image.alt | default: '' | escape }}"
+                  width="{{ fallback_image.width }}"
+                  height="{{ fallback_image.height }}"
+                  loading="lazy"
+                  class="one-routine__hero-image"
+                >
+              {%- endif -%}
+            </picture>
+
+            {%- if section.settings.badge_1_text != blank -%}
+              <span
+                class="one-routine__badge one-routine__badge--1"
+                style="background-color: {{ section.settings.badge_1_color }};"
+              >
+                {{- section.settings.badge_1_text | escape -}}
+              </span>
+            {%- endif -%}
+
+            {%- if section.settings.badge_2_text != blank -%}
+              <span
+                class="one-routine__badge one-routine__badge--2"
+                style="background-color: {{ section.settings.badge_2_color }};"
+              >
+                {{- section.settings.badge_2_text | escape -}}
+              </span>
+            {%- endif -%}
+
+            {%- if section.settings.badge_3_text != blank -%}
+              <span
+                class="one-routine__badge one-routine__badge--3"
+                style="background-color: {{ section.settings.badge_3_color }};"
+              >
+                {{- section.settings.badge_3_text | escape -}}
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="one-routine__col one-routine__col--right">
+        {%- if section.blocks.size > 0 -%}
+          <div class="one-routine__items">
+            {%- for block in section.blocks -%}
+              <div class="one-routine__item" {{ block.shopify_attributes }}>
+                <div class="one-routine__item-img">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 180 }}"
+                      alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                      width="90"
+                      height="80"
+                      loading="lazy"
+                      class="one-routine__item-image"
+                    >
+                  {%- endif -%}
+                </div>
+                <div class="one-routine__item-content">
+                  <div class="one-routine__item-title-row">
+                    {%- if block.settings.show_dot -%}
+                      <span
+                        class="one-routine__item-dot"
+                        style="background-color: {{ block.settings.dot_color }};"
+                      ></span>
+                    {%- endif -%}
+                    {%- if block.settings.title != blank -%}
+                      <span class="one-routine__item-title">{{ block.settings.title | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.description != blank and block.settings.original_price == blank -%}
+                    <p class="one-routine__item-desc">{{ block.settings.description | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.original_price != blank -%}
+                    <p class="one-routine__item-price">
+                      <span class="one-routine__item-price-original">{{ block.settings.original_price | escape }}</span>
+                      {%- if block.settings.sale_price != blank -%}
+                        <span class="one-routine__item-price-sale">{{ block.settings.sale_price | escape }}</span>
+                      {%- endif -%}
+                    </p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+
+            <div class="one-routine__price-row">
+              <div class="one-routine__price-set">
+                {%- if section.settings.total_label != blank -%}
+                  <span class="one-routine__price-label">{{ section.settings.total_label | escape }}</span>
+                {%- endif -%}
+                {%- if section.settings.total_original_price != blank -%}
+                  <span class="one-routine__price-original">{{ section.settings.total_original_price | escape }}</span>
+                {%- endif -%}
+                {%- if section.settings.total_sale_price != blank -%}
+                  <span class="one-routine__price-sale">{{ section.settings.total_sale_price | escape }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="one-routine__footer">
+          {%- if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank -%}
+            <div class="one-routine__benefits">
+              {%- if section.settings.benefit_1 != blank -%}
+                <span class="one-routine__benefit">{{ section.settings.benefit_1 | escape }}</span>
+              {%- endif -%}
+              {%- if section.settings.benefit_2 != blank -%}
+                <span class="one-routine__benefit">{{ section.settings.benefit_2 | escape }}</span>
+              {%- endif -%}
+              {%- if section.settings.benefit_3 != blank -%}
+                <span class="one-routine__benefit">{{ section.settings.benefit_3 | escape }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_text != blank -%}
+            <a
+              class="one-routine__button"
+              {% if section.settings.button_url != blank %}href="{{ section.settings.button_url }}"{% endif %}
+              style="--one-routine-button-color: {{ section.settings.button_color }};"
+            >
+              {{- section.settings.button_text | escape -}}
+            </a>
+          {%- endif -%}
+
+          <div class="one-routine__claims">
+            {%- if section.settings.claim_image != blank -%}
+              <img
+                src="{{ section.settings.claim_image | image_url: width: 138 }}"
+                alt=""
+                class="one-routine__claims-logo"
+                width="69"
+                height="12"
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if section.settings.claim_text != blank -%}
+              <span class="one-routine__claims-text">{{ section.settings.claim_text | escape }}</span>
+            {%- endif -%}
+            {%- if section.settings.claim_link_text != blank -%}
+              <a
+                class="one-routine__claims-link"
+                {% if section.settings.claim_link_url != blank %}href="{{ section.settings.claim_link_url }}"{% endif %}
+              >
+                {{- section.settings.claim_link_text | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.one-routine {
+  display: flex;
+  flex-direction: column;
+}
+
+.one-routine__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__layout {
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+  }
+}
+
+.one-routine__col {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__col--left,
+  .one-routine__col--right {
+    flex: 1;
+  }
+}
+
+.one-routine__col--left {
+  gap: 20px;
+  justify-content: center;
+}
+
+.one-routine__col--right {
+  gap: 12px;
+}
+
+/* Label */
+.one-routine__label {
+  font-family: var(--font-accent--family);
+  font-weight: 400;
+  font-style: var(--font-accent--style);
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #767676;
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__label {
+    display: block;
+  }
+}
+
+/* Heading */
+.one-routine__heading {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  font-style: var(--font-heading--style);
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  color: #767676;
+  margin: 0;
+}
+
+.one-routine__heading p {
+  margin: 0;
+}
+
+.one-routine__heading strong {
+  font-weight: 400;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__heading {
+    font-size: 48px;
+    line-height: 52px;
+  }
+}
+
+/* Endorsement */
+.one-routine__endorsement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.one-routine__endorsement-avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.one-routine__endorsement-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.one-routine__endorsement-check {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  background-color: #414141;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.one-routine__endorsement-check img {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+.one-routine__endorsement-text {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 14px;
+  line-height: 18px;
+  color: #767676;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__endorsement-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+/* Hero image */
+.one-routine__hero {
+  position: relative;
+}
+
+.one-routine__hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Badges */
+.one-routine__badge {
+  position: absolute;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-family: var(--font-subheading--family);
+  font-weight: 700;
+  font-style: var(--font-subheading--style);
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* Badge positions — mobile */
+.one-routine__badge--1 {
+  top: 8%;
+  right: 5%;
+}
+
+.one-routine__badge--2 {
+  top: 38%;
+  left: 0;
+  transform: translateX(-5%);
+}
+
+.one-routine__badge--3 {
+  bottom: 8%;
+  right: 5%;
+}
+
+/* Badge positions — desktop */
+@media screen and (min-width: 990px) {
+  .one-routine__badge--1 {
+    top: 5%;
+    right: 5%;
+  }
+
+  .one-routine__badge--2 {
+    top: 42%;
+    left: -2%;
+    transform: none;
+  }
+
+  .one-routine__badge--3 {
+    bottom: 10%;
+    right: 3%;
+  }
+}
+
+/* Product items */
+.one-routine__items {
+  display: flex;
+  flex-direction: column;
+}
+
+.one-routine__item {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #D9D9DB;
+}
+
+.one-routine__item:first-child {
+  padding-top: 4px;
+}
+
+.one-routine__item-img {
+  width: 90px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.one-routine__item-image {
+  max-width: 90px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.one-routine__item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+}
+
+.one-routine__item-title-row {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.one-routine__item-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.one-routine__item-title {
+  font-family: var(--font-subheading--family);
+  font-weight: 700;
+  font-style: var(--font-subheading--style);
+  font-size: 16px;
+  line-height: 20px;
+  color: #414141;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__item-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.one-routine__item-desc {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  font-style: var(--font-heading--style);
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.5px;
+  color: #414141;
+  margin: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__item-desc {
+    font-size: 18px;
+    line-height: 24px;
+    color: #767676;
+  }
+}
+
+.one-routine__item-price {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  font-style: var(--font-heading--style);
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.5px;
+  color: #414141;
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__item-price {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.one-routine__item-price-original {
+  text-decoration: line-through;
+}
+
+.one-routine__item-price-sale {
+  font-weight: 400;
+}
+
+/* Price row */
+.one-routine__price-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #D9D9DB;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__price-row {
+    justify-content: flex-end;
+    padding: 8px 16px 8px 4px;
+  }
+}
+
+.one-routine__price-set {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.one-routine__price-label {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 18px;
+  line-height: 20px;
+  color: #A0A0A0;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__price-label {
+    font-size: 18px;
+    line-height: 24px;
+    color: #767676;
+  }
+}
+
+.one-routine__price-original {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 18px;
+  line-height: 24px;
+  text-decoration: line-through;
+  color: #A0A0A0;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__price-original {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.one-routine__price-sale {
+  font-family: var(--font-subheading--family);
+  font-weight: 700;
+  font-style: var(--font-subheading--style);
+  font-size: 20px;
+  line-height: 24px;
+  color: #414141;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__price-sale {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
+/* Footer */
+.one-routine__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Benefits */
+.one-routine__benefits {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  flex-wrap: wrap;
+}
+
+.one-routine__benefit {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 14px;
+  line-height: 18px;
+  color: #414141;
+  text-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__benefit {
+    font-size: 16px;
+    line-height: 20px;
+    color: #767676;
+  }
+}
+
+.one-routine__benefit:not(:first-child) {
+  border-inline-start: 1px solid #D9D9DB;
+  padding-inline-start: 8px;
+}
+
+/* CTA Button */
+.one-routine__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--one-routine-button-color, #BC0F0F);
+  border-radius: 28px;
+  padding: 12px 20px;
+  font-family: var(--font-accent--family);
+  font-weight: 400;
+  font-style: var(--font-accent--style);
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+@media screen and (min-width: 990px) {
+  .one-routine__button {
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+/* Claims */
+.one-routine__claims {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.one-routine__claims-logo {
+  height: 12px;
+  width: auto;
+  display: block;
+}
+
+.one-routine__claims-text {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 14px;
+  line-height: 16px;
+  color: #767676;
+}
+
+.one-routine__claims-link {
+  font-family: var(--font-subheading--family);
+  font-weight: 500;
+  font-style: var(--font-subheading--style);
+  font-size: 14px;
+  line-height: 20px;
+  color: #767676;
+  text-decoration: underline;
+}
+
+/* Mobile reordering */
+@media screen and (max-width: 749px) {
+  .one-routine__col--left,
+  .one-routine__col--right {
+    display: contents;
+  }
+
+  .one-routine__heading {
+    order: 1;
+  }
+
+  .one-routine__hero {
+    order: 2;
+  }
+
+  .one-routine__items {
+    order: 3;
+  }
+
+  .one-routine__endorsement {
+    order: 4;
+  }
+
+  .one-routine__footer {
+    order: 5;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.one_routine",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.heading"
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "t:settings.label_text",
+      "default": "Cardiologist recommended"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p>Heart health made easy with <strong>one routine.</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "t:content.hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "t:settings.hero_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "t:settings.hero_image_mobile"
+    },
+    {
+      "type": "header",
+      "content": "t:content.badges"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "t:settings.badge_1_text",
+      "default": "Blood Pressure"
+    },
+    {
+      "type": "color",
+      "id": "badge_1_color",
+      "label": "t:settings.badge_1_color",
+      "default": "#8C0132"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "t:settings.badge_2_text",
+      "default": "Metabolic"
+    },
+    {
+      "type": "color",
+      "id": "badge_2_color",
+      "label": "t:settings.badge_2_color",
+      "default": "#E6305E"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_text",
+      "label": "t:settings.badge_3_text",
+      "default": "Cholesterol"
+    },
+    {
+      "type": "color",
+      "id": "badge_3_color",
+      "label": "t:settings.badge_3_color",
+      "default": "#D54427"
+    },
+    {
+      "type": "header",
+      "content": "t:content.endorsement"
+    },
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "t:settings.doctor_image"
+    },
+    {
+      "type": "text",
+      "id": "doctor_text",
+      "label": "t:settings.doctor_text",
+      "default": "Our Chief Cardiologist, Dr. Christopher Davis, MD recommends this for daily heart support."
+    },
+    {
+      "type": "header",
+      "content": "t:content.pricing"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "t:settings.total_label",
+      "default": "Total Price:"
+    },
+    {
+      "type": "text",
+      "id": "total_original_price",
+      "label": "t:settings.total_original_price",
+      "default": "$100.00"
+    },
+    {
+      "type": "text",
+      "id": "total_sale_price",
+      "label": "t:settings.total_sale_price",
+      "default": "$80.00"
+    },
+    {
+      "type": "header",
+      "content": "t:content.benefits"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "t:settings.benefit_1",
+      "default": "Delivered every 3 months"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "t:settings.benefit_2",
+      "default": "50% OFF on first month"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "t:settings.benefit_3",
+      "default": "90-day guarantee"
+    },
+    {
+      "type": "header",
+      "content": "t:content.buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "SHOP ROUTINE"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "t:settings.button_color",
+      "default": "#BC0F0F"
+    },
+    {
+      "type": "header",
+      "content": "t:content.claims"
+    },
+    {
+      "type": "image_picker",
+      "id": "claim_image",
+      "label": "t:settings.claim_image"
+    },
+    {
+      "type": "text",
+      "id": "claim_text",
+      "label": "t:settings.claim_text",
+      "default": "HSF-FSA eligible"
+    },
+    {
+      "type": "text",
+      "id": "claim_link_text",
+      "label": "t:settings.claim_link_text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "claim_link_url",
+      "label": "t:settings.claim_link_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product-item",
+      "name": "t:names.product_item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.title",
+          "default": "Product title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "t:settings.description",
+          "default": "Product description"
+        },
+        {
+          "type": "color",
+          "id": "dot_color",
+          "label": "t:settings.dot_color",
+          "default": "#8C0132"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dot",
+          "label": "t:settings.show_dot",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "original_price",
+          "label": "t:settings.original_price"
+        },
+        {
+          "type": "text",
+          "id": "sale_price",
+          "label": "t:settings.sale_price"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "t:names.one_routine",
+      "settings": {
+        "label_text": "Cardiologist recommended",
+        "heading": "<p>Heart health made easy with <strong>one routine.<\/strong><\/p>"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "product-item",
+          "settings": {
+            "title": "SuperBeets® Heart Chews",
+            "description": "Clinically studied beetroot + grape seed for healthy blood pressure support.",
+            "dot_color": "#8C0132",
+            "show_dot": true
+          }
+        },
+        "item_2": {
+          "type": "product-item",
+          "settings": {
+            "title": "Cholesterol Health Daily",
+            "description": "A plant-based blend of aged black garlic and citrus bergamot for cholesterol support.",
+            "dot_color": "#D54427",
+            "show_dot": true
+          }
+        },
+        "item_3": {
+          "type": "product-item",
+          "settings": {
+            "title": "Metabolic Health Daily",
+            "description": "Triple-action support for blood sugar balance, insulin function, and energy metabolism.",
+            "dot_color": "#E6305E",
+            "show_dot": true
+          }
+        },
+        "item_4": {
+          "type": "product-item",
+          "settings": {
+            "title": "FREE CoQ10 sample",
+            "show_dot": false,
+            "original_price": "$12.00",
+            "sale_price": "$0.00"
+          }
+        }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4"]
+    }
+  ]
+}
+{% endschema %}

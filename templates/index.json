@@ -378,6 +378,86 @@
         "key_card_2",
         "key_card_3"
       ]
+    },
+    "one_routine": {
+      "type": "one-routine",
+      "settings": {
+        "label_text": "Cardiologist recommended",
+        "heading": "<p>Heart health made easy with <strong>one routine.<\/strong><\/p>",
+        "hero_image": "shopify://shop_images/image-883-desktop-31733365.png",
+        "hero_image_mobile": "shopify://shop_images/hero-image-mobile-header-I31301882211753.png",
+        "badge_1_text": "Blood Pressure",
+        "badge_1_color": "#8C0132",
+        "badge_2_text": "Metabolic",
+        "badge_2_color": "#E6305E",
+        "badge_3_text": "Cholesterol",
+        "badge_3_color": "#D54427",
+        "doctor_image": "shopify://shop_images/ellipse-228-mobile-header-31301311.jpg",
+        "doctor_text": "Our Chief Cardiologist, Dr. Christopher Davis, MD recommends this for daily heart support.",
+        "total_label": "Total Price:",
+        "total_original_price": "$100.00",
+        "total_sale_price": "$80.00",
+        "benefit_1": "Delivered every 3 months",
+        "benefit_2": "50% OFF on first month",
+        "benefit_3": "90-day guarantee",
+        "button_text": "SHOP ROUTINE",
+        "button_color": "#BC0F0F",
+        "claim_image": "shopify://shop_images/image-882-mobile-33849955.png",
+        "claim_text": "HSF-FSA eligible",
+        "claim_link_text": "Learn more",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": {
+        "or_item_1": {
+          "type": "product-item",
+          "settings": {
+            "image": "shopify://shop_images/sbhc-1-front-1-mobile-I338499357513830.png",
+            "title": "SuperBeets® Heart Chews",
+            "description": "Clinically studied beetroot + grape seed for healthy blood pressure support.",
+            "dot_color": "#8C0132",
+            "show_dot": true
+          }
+        },
+        "or_item_2": {
+          "type": "product-item",
+          "settings": {
+            "image": "shopify://shop_images/sbhc-1-front-1-mobile-I338499367513830.png",
+            "title": "Cholesterol Health Daily",
+            "description": "A plant-based blend of aged black garlic and citrus bergamot for cholesterol support.",
+            "dot_color": "#D54427",
+            "show_dot": true
+          }
+        },
+        "or_item_3": {
+          "type": "product-item",
+          "settings": {
+            "image": "shopify://shop_images/sbhc-1-front-1-mobile-I338499377513830.png",
+            "title": "Metabolic Health Daily",
+            "description": "Triple-action support for blood sugar balance, insulin function, and energy metabolism.",
+            "dot_color": "#E6305E",
+            "show_dot": true
+          }
+        },
+        "or_item_4": {
+          "type": "product-item",
+          "settings": {
+            "image": "shopify://shop_images/sbhc-1-front-1-mobile-I338499357513830.png",
+            "title": "FREE CoQ10 sample",
+            "show_dot": false,
+            "original_price": "$12.00",
+            "sale_price": "$0.00"
+          }
+        }
+      },
+      "block_order": [
+        "or_item_1",
+        "or_item_2",
+        "or_item_3",
+        "or_item_4"
+      ]
     }
   },
   "order": [
@@ -385,6 +465,7 @@
     "product_list_fa6P9H",
     "ask_me",
     "social_proof_reviews",
-    "three_keys"
+    "three_keys",
+    "one_routine"
   ]
 }
