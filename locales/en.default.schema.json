@@ -441,7 +441,9 @@
     "ask_me": "Ask me",
     "social_proof_reviews": "Social proof reviews",
     "image_review": "Image review",
-    "text_review": "Text review"
+    "text_review": "Text review",
+    "three_keys": "Three keys",
+    "key_card": "Key card"
   },
   "options": {
     "above_carousel": "Above carousel",

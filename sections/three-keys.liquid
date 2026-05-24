@@ -1,0 +1,616 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="three-keys spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- if section.settings.heading != blank or section.settings.subtitle != blank or section.settings.bold_subtitle != blank -%}
+      <div class="three-keys__header">
+        {%- if section.settings.heading != blank -%}
+          <div class="three-keys__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="three-keys__subtitle">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.show_divider -%}
+          <hr class="three-keys__divider">
+        {%- endif -%}
+
+        {%- if section.settings.bold_subtitle != blank -%}
+          <p class="three-keys__bold-subtitle">{{ section.settings.bold_subtitle | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="three-keys__cards">
+        {%- for block in section.blocks -%}
+          <input
+            type="radio"
+            name="three-keys-{{ section.id }}"
+            id="three-keys-radio-{{ block.id }}"
+            class="three-keys__radio"
+            {% if forloop.first %}checked{% endif %}
+          >
+          <div
+            class="three-keys__card"
+            style="--card-bg: {{ block.settings.background_color }}; --card-z: {{ forloop.index }};"
+            {{ block.shopify_attributes }}
+          >
+            <label class="three-keys__card-header" for="three-keys-radio-{{ block.id }}">
+              {%- if block.settings.number != blank -%}
+                <span class="three-keys__card-number">{{ block.settings.number | escape }}</span>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <span class="three-keys__card-name">{{ block.settings.title | escape }}</span>
+              {%- endif -%}
+            </label>
+
+            <div class="three-keys__card-body">
+              {%- if block.settings.intro_text != blank -%}
+                <div class="three-keys__card-intro">
+                  <p>{{ block.settings.intro_text | escape }}</p>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.stat_value != blank or block.settings.stat_description != blank -%}
+                <div class="three-keys__card-stat">
+                  <div class="three-keys__card-stat-content">
+                    {%- if block.settings.stat_value != blank -%}
+                      <span class="three-keys__card-stat-value">{{ block.settings.stat_value | escape }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.stat_description != blank -%}
+                      <p class="three-keys__card-stat-desc">{{ block.settings.stat_description | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.icon_asset != blank -%}
+                    <img
+                      class="three-keys__card-stat-icon"
+                      src="{{ block.settings.icon_asset | asset_url }}"
+                      alt=""
+                      width="48"
+                      height="44"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.button_text != blank -%}
+                <a
+                  class="three-keys__card-button"
+                  {% if block.settings.button_url != blank %}href="{{ block.settings.button_url }}"{% endif %}
+                >
+                  {{- block.settings.button_text | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.three-keys {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.three-keys__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.three-keys__heading {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  font-style: var(--font-heading--style);
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.three-keys__heading strong {
+  font-family: var(--font-body--family);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.three-keys__heading p {
+  margin: 0;
+}
+
+.three-keys__subtitle {
+  font-family: var(--font-body--family);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.three-keys__divider {
+  border: none;
+  border-top: 1px solid currentColor;
+  opacity: 0.15;
+  margin: 0;
+  width: 100%;
+}
+
+.three-keys__bold-subtitle {
+  font-family: var(--font-body--family);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+/* Radio inputs — visually hidden */
+.three-keys__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cards container */
+.three-keys__cards {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Individual card */
+.three-keys__card {
+  background-color: var(--card-bg);
+  position: relative;
+  z-index: var(--card-z);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 16px 16px 0 0;
+  padding: 20px 16px 48px 16px;
+}
+
+.three-keys__card:first-of-type {
+  padding: 20px 16px 40px 16px;
+}
+
+.three-keys__card:last-of-type {
+  padding: 24px 16px 24px 16px;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Mobile stacking: negative margin for overlapping headers */
+.three-keys__card + .three-keys__radio + .three-keys__card {
+  margin-top: -24px;
+}
+
+/* Card header — acts as label on mobile */
+.three-keys__card-header {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.three-keys__card-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
+  font-family: var(--font-accent--family);
+  font-weight: 400;
+  font-style: var(--font-accent--style);
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.three-keys__card-name {
+  font-family: var(--font-accent--family);
+  font-weight: 400;
+  font-style: var(--font-accent--style);
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/* Card body — mobile accordion */
+.three-keys__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+/* Expand body when radio is checked */
+.three-keys__radio:checked + .three-keys__card .three-keys__card-body {
+  max-height: 600px;
+}
+
+/* Expanded card gets full padding */
+.three-keys__radio:checked + .three-keys__card {
+  padding: 20px 16px 40px 16px;
+}
+
+/* Card intro text */
+.three-keys__card-intro {
+  padding: 0 8px;
+}
+
+.three-keys__card-intro p {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  font-style: var(--font-heading--style);
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* Stat box */
+.three-keys__card-stat {
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.three-keys__card-stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.three-keys__card-stat-value {
+  font-family: var(--font-body--family);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 36px;
+  color: #FFFFFF;
+}
+
+.three-keys__card-stat-desc {
+  font-family: var(--font-body--family);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.5px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.three-keys__card-stat-icon {
+  width: 48px;
+  height: 44px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* CTA button */
+.three-keys__card-button {
+  display: block;
+  border: 1px solid #FFFFFF;
+  border-radius: 28px;
+  padding: 8px 16px;
+  text-align: center;
+  font-family: var(--font-accent--family);
+  font-weight: 400;
+  font-style: var(--font-accent--style);
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.three-keys__card-button:hover {
+  opacity: 0.8;
+}
+
+/* ===== Desktop (min-width: 750px) ===== */
+@media screen and (min-width: 750px) {
+  .three-keys {
+    gap: 32px;
+  }
+
+  .three-keys__heading {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .three-keys__subtitle {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .three-keys__bold-subtitle {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .three-keys__cards {
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px 0;
+  }
+
+  .three-keys__card {
+    flex: 1;
+    border-radius: 16px;
+    padding: 32px;
+    gap: 20px;
+    margin-top: 0;
+  }
+
+  .three-keys__card:first-of-type {
+    padding: 32px;
+  }
+
+  .three-keys__card:last-of-type {
+    padding: 32px;
+    border-radius: 16px;
+  }
+
+  /* Remove negative margin on desktop */
+  .three-keys__card + .three-keys__radio + .three-keys__card {
+    margin-top: 0;
+  }
+
+  /* Disable cursor pointer on desktop */
+  .three-keys__card-header {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .three-keys__card-number {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .three-keys__card-name {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  /* Card body always visible on desktop */
+  .three-keys__card-body {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .three-keys__card-intro p {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .three-keys__card-stat-value {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .three-keys__card-stat-desc {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .three-keys__card-button {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.three_keys",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Powered through nitric oxide and  better blood flow."
+    },
+    {
+      "type": "text",
+      "id": "bold_subtitle",
+      "label": "Bold subtitle",
+      "default": "The 3 Keys to Cardiovascular Health"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show divider",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page_width" },
+        { "value": "full-width", "label": "t:options.full_width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "key-card",
+      "name": "t:names.key_card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#8C0132"
+        },
+        {
+          "type": "textarea",
+          "id": "intro_text",
+          "label": "Intro text"
+        },
+        {
+          "type": "text",
+          "id": "stat_value",
+          "label": "Stat value"
+        },
+        {
+          "type": "textarea",
+          "id": "stat_description",
+          "label": "Stat description"
+        },
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon filename",
+          "info": "SVG filename from assets folder (e.g. icon.svg)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.three_keys",
+      "blocks": [
+        {
+          "type": "key-card",
+          "settings": {
+            "number": "1",
+            "title": "Blood Pressure",
+            "background_color": "#8C0132",
+            "intro_text": "Healthy blood pressure starts with blood flow, and blood flow starts with nitric oxide.",
+            "stat_value": "2x",
+            "stat_description": "more effective blood pressure support when compared to diet and exercise alone.¹",
+            "icon_asset": "icon.svg",
+            "button_text": "SHOP Blood Pressure"
+          }
+        },
+        {
+          "type": "key-card",
+          "settings": {
+            "number": "2",
+            "title": "Metabolic",
+            "background_color": "#E6305E",
+            "intro_text": "Help your body use energy more smoothly and steadily.",
+            "stat_value": "78%",
+            "stat_description": "of customers report improved energy levels, after completing their first 90-day routine.",
+            "icon_asset": "icon-2.svg",
+            "button_text": "SHOP Metabolic"
+          }
+        },
+        {
+          "type": "key-card",
+          "settings": {
+            "number": "3",
+            "title": "Cholesterol",
+            "background_color": "#D54427",
+            "intro_text": "Help your body keep cholesterol levels in a healthy range.",
+            "stat_value": "29%",
+            "stat_description": "reduction in LDL (bad cholesterol) and a 11% reduction in total cholesterol.",
+            "icon_asset": "icon-3.svg",
+            "button_text": "SHOP CHOLESTEROL"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
