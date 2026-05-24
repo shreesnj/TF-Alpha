@@ -255,6 +255,7 @@
     "announcement": "Announcement",
     "announcement_bar": "Announcement bar",
     "badges": "Badges",
+    "bestsellers": "Bestsellers",
     "blog": "Blog",
     "blog_card": "Blog card",
     "blog_post": "Blog post",
@@ -522,6 +523,7 @@
     "dairy": "Dairy",
     // Icon option for dietary restriction indication
     "dairy_free": "Dairy free",
+    "dark": "Dark",
     "default": "Default",
     "diamond": "Diamond",
     "dissolve": "Dissolve",
@@ -1252,7 +1254,10 @@
     "name_label": "Name",
     "subtitle": "Subtitle",
     "icon_style": "Icon style",
-    "card_text": "Card text"
+    "card_text": "Card text",
+    "badge_text": "Badge text",
+    "badge_style": "Badge style",
+    "cta_url": "CTA URL"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

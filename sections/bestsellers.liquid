@@ -1,0 +1,640 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="bestsellers spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- if section.settings.heading != blank -%}
+      <div class="bestsellers__header">
+        <div class="bestsellers__heading">{{ section.settings.heading }}</div>
+        <hr class="bestsellers__divider">
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="bestsellers__carousel">
+        {%- for block in section.blocks -%}
+          <div class="bestsellers__card" {{ block.shopify_attributes }}>
+            <div class="bestsellers__card-image">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 768 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 280 }} 280w,
+                    {{ block.settings.image | image_url: width: 375 }} 375w,
+                    {{ block.settings.image | image_url: width: 550 }} 550w,
+                    {{ block.settings.image | image_url: width: 768 }} 768w
+                  "
+                  sizes="(min-width: 990px) 340px, 280px"
+                  alt="{{ block.settings.title | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="bestsellers__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+
+            <div class="bestsellers__card-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="bestsellers__card-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+
+              <div class="bestsellers__card-meta">
+                {%- if block.settings.star_rating != blank -%}
+                  <div class="bestsellers__card-reviews">
+                    <span class="bestsellers__card-rating">{{ block.settings.star_rating }}</span>
+                    {%- assign rating_value = block.settings.star_rating | plus: 0 -%}
+                    {% render 'star-rating', rating: rating_value, color: '#BC0F0F', size: 20 %}
+                    {%- if block.settings.review_count != blank -%}
+                      <span class="bestsellers__card-count">{{ block.settings.review_count }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.badge_text != blank -%}
+                  <span class="bestsellers__card-badge bestsellers__card-badge--{{ block.settings.badge_style }}">
+                    {{- block.settings.badge_text | escape -}}
+                  </span>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.description != blank -%}
+                <p class="bestsellers__card-description">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.cta_text != blank -%}
+                <div class="bestsellers__card-cta">
+                  <a
+                    class="bestsellers__card-link"
+                    {% if block.settings.cta_url != blank %}href="{{ block.settings.cta_url }}"{% endif %}
+                  >
+                    {{- block.settings.cta_text | escape -}}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <hr class="bestsellers__divider">
+      <div class="bestsellers__btn">
+        <a
+          class="bestsellers__button"
+          {% if section.settings.button_url != blank %}href="{{ section.settings.button_url }}"{% endif %}
+        >
+          {{- section.settings.button_text | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .bestsellers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-inline: 12px;
+    background-color: #F5F5F5;
+  }
+
+  .bestsellers__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bestsellers__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #767676;
+    margin: 0;
+  }
+
+  .bestsellers__heading p {
+    margin: 0;
+  }
+
+  .bestsellers__heading strong {
+    color: #414141;
+  }
+
+  .bestsellers__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0;
+    width: 100%;
+  }
+
+  .bestsellers__carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-inline: 8px;
+  }
+
+  .bestsellers__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bestsellers__card {
+    flex: 0 0 auto;
+    min-width: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    scroll-snap-align: start;
+  }
+
+  .bestsellers__card-image {
+    width: 100%;
+    aspect-ratio: 280 / 188;
+    overflow: hidden;
+  }
+
+  .bestsellers__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bestsellers__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-foreground);
+    opacity: 0.1;
+  }
+
+  .bestsellers__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    flex: 1;
+  }
+
+  .bestsellers__card-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: #414141;
+    margin: 0;
+  }
+
+  .bestsellers__card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .bestsellers__card-reviews {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding-right: 4px;
+  }
+
+  .bestsellers__card-rating {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: #BC0F0F;
+    margin-right: 2px;
+  }
+
+  .bestsellers__card-count {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: #767676;
+    margin-left: 2px;
+  }
+
+  .bestsellers__card-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+  }
+
+  .bestsellers__card-badge--dark {
+    background-color: #767676;
+    color: #FFFFFF;
+  }
+
+  .bestsellers__card-badge--light {
+    background-color: #F5F5F5;
+    color: #767676;
+  }
+
+  .bestsellers__card-description {
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: #414141;
+    margin: 0;
+  }
+
+  .bestsellers__card-cta {
+    padding: 8px 0;
+  }
+
+  .bestsellers__card-link {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+    color: #414141;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .bestsellers__card-link:hover {
+    opacity: 0.8;
+  }
+
+  .bestsellers__btn {
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+  }
+
+  .bestsellers__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 28px;
+    border: 2px solid #000000;
+    background: transparent;
+    color: #000000;
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .bestsellers__button:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (min-width: 750px) {
+    .bestsellers__card {
+      min-width: 320px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .bestsellers {
+      gap: 24px;
+      padding-inline: 0;
+      background-color: transparent;
+    }
+
+    .bestsellers__heading {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    .bestsellers__carousel {
+      padding-inline: 0;
+      margin-inline-end: calc(-1 * var(--util-page-margin-offset, 120px));
+    }
+
+    .bestsellers__card {
+      min-width: 340px;
+      background-color: #F5F5F5;
+    }
+
+    .bestsellers__card:first-child {
+      min-width: 374px;
+      border-radius: 18px;
+    }
+
+    .bestsellers__card-image {
+      aspect-ratio: 340 / 258;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-image {
+      aspect-ratio: 374 / 273;
+    }
+
+    .bestsellers__card-content {
+      gap: 8px;
+      padding: 20px;
+      justify-content: flex-end;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-content {
+      padding: 22px;
+    }
+
+    .bestsellers__card-title {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-title {
+      font-size: 22px;
+      line-height: 26px;
+    }
+
+    .bestsellers__card-rating {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-rating {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .bestsellers__card-count {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-count {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .bestsellers__card-badge--light {
+      background-color: #FFFFFF;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-badge {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .bestsellers__card-description {
+      font-size: 18px;
+      line-height: 24px;
+      color: #767676;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-description {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .bestsellers__card:first-child .bestsellers__card-link {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .bestsellers__btn {
+      padding: 8px 0;
+    }
+
+    .bestsellers__button {
+      width: auto;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.bestsellers",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p><strong>Bestsellers</strong> for cardiovascular support.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.button_text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:settings.button_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product-card",
+      "name": "t:names.product_card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.title",
+          "default": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "star_rating",
+          "label": "t:settings.star_rating",
+          "default": "4.5"
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "t:settings.review_count",
+          "default": "(100)"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "t:settings.badge_text"
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "t:settings.badge_style",
+          "options": [
+            { "value": "dark", "label": "t:options.dark" },
+            { "value": "light", "label": "t:options.light" }
+          ],
+          "default": "light"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "t:settings.description"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "t:settings.cta_text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "t:settings.cta_url"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "t:names.bestsellers",
+      "blocks": [
+        {
+          "type": "product-card",
+          "settings": {
+            "title": "SuperBeets® Heart Chews",
+            "star_rating": "4.4",
+            "review_count": "(7,143)",
+            "badge_text": "#1 cardiologist recommended",
+            "badge_style": "dark",
+            "description": "Our signature product – supporting healthy blood pressure",
+            "cta_text": "Shop Now"
+          }
+        },
+        {
+          "type": "product-card",
+          "settings": {
+            "title": "SuperBeets® Heart Powder",
+            "star_rating": "4.2",
+            "review_count": "(3,313)",
+            "badge_text": "1.2M+ sold",
+            "badge_style": "light",
+            "description": "Daily heart support, scoop by scoop.",
+            "cta_text": "Shop Now"
+          }
+        },
+        {
+          "type": "product-card",
+          "settings": {
+            "title": "Cardiovascular Health Daily",
+            "star_rating": "4.5",
+            "review_count": "(7,138)",
+            "badge_text": "800K+ sold",
+            "badge_style": "light",
+            "description": "Daily support for healthy blood flow.",
+            "cta_text": "Shop Now"
+          }
+        },
+        {
+          "type": "product-card",
+          "settings": {
+            "title": "Sport Pre-Workout Powder",
+            "star_rating": "4.5",
+            "review_count": "(475)",
+            "badge_text": "Athlete's choice",
+            "badge_style": "light",
+            "description": "Clean energy for your next session.",
+            "cta_text": "Shop Now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

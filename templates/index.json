@@ -505,6 +505,77 @@
         "or_item_4"
       ]
     },
+    "bestsellers": {
+      "type": "bestsellers",
+      "settings": {
+        "heading": "<p><strong>Bestsellers</strong> for cardiovascular support.</p>",
+        "button_text": "Shop All",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
+      "blocks": {
+        "card_1": {
+          "type": "product-card",
+          "settings": {
+            "image": "shopify://shop_images/screenshot-2026-04-09-at-12-48-21-1-mobile-31614003.png",
+            "title": "SuperBeets® Heart Chews",
+            "star_rating": "4.4",
+            "review_count": "(7,143)",
+            "badge_text": "#1 cardiologist recommended",
+            "badge_style": "dark",
+            "description": "Our signature product – supporting healthy blood pressure",
+            "cta_text": "Shop Now"
+          }
+        },
+        "card_2": {
+          "type": "product-card",
+          "settings": {
+            "image": "shopify://shop_images/screenshot-2026-04-09-at-12-48-21-1-mobile-31614027.png",
+            "title": "SuperBeets® Heart Powder",
+            "star_rating": "4.2",
+            "review_count": "(3,313)",
+            "badge_text": "1.2M+ sold",
+            "badge_style": "light",
+            "description": "Daily heart support, scoop by scoop.",
+            "cta_text": "Shop Now"
+          }
+        },
+        "card_3": {
+          "type": "product-card",
+          "settings": {
+            "image": "shopify://shop_images/screenshot-2026-04-09-at-12-48-21-1-mobile-31614051.png",
+            "title": "Cardiovascular Health Daily",
+            "star_rating": "4.5",
+            "review_count": "(7,138)",
+            "badge_text": "800K+ sold",
+            "badge_style": "light",
+            "description": "Daily support for healthy blood flow.",
+            "cta_text": "Shop Now"
+          }
+        },
+        "card_4": {
+          "type": "product-card",
+          "settings": {
+            "image": "shopify://shop_images/screenshot-2026-04-09-at-12-48-21-1-mobile-31614075.png",
+            "title": "Sport Pre-Workout Powder",
+            "star_rating": "4.5",
+            "review_count": "(475)",
+            "badge_text": "Athlete's choice",
+            "badge_style": "light",
+            "description": "Clean energy for your next session.",
+            "cta_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ]
+    },
     "science_deep_dive": {
       "type": "science-deep-dive",
       "settings": {
@@ -552,6 +623,7 @@
   "order": [
     "hero_carousel",
     "product_list_fa6P9H",
+    "bestsellers",
     "ask_me",
     "social_proof_reviews",
     "backed_by",
