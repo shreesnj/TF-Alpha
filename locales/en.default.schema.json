@@ -451,7 +451,9 @@
     "three_keys": "Three keys",
     "key_card": "Key card",
     "one_routine": "One Routine",
-    "product_item": "Product item"
+    "product_item": "Product item",
+    "backed_by": "Backed by",
+    "expert_card": "Expert card"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1236,7 +1238,13 @@
     "show_dot": "Show dot",
     "original_price": "Original price",
     "sale_price": "Sale price",
-    "description": "Description"
+    "description": "Description",
+    "subheading": "Subheading",
+    "show_dividers": "Show dividers",
+    "video_url": "Video URL",
+    "quote": "Quote",
+    "credentials": "Credentials",
+    "name_label": "Name"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

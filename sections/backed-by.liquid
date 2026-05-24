@@ -1,0 +1,530 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="backed-by spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {%- if section.settings.heading != blank -%}
+      <div class="backed-by__heading">{{ section.settings.heading }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="backed-by__subtitle">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="backed-by__grid-wrapper">
+        {%- if section.settings.show_dividers -%}
+          <hr class="backed-by__divider">
+        {%- endif -%}
+
+        <div class="backed-by__grid" id="backed-by-grid-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            <div class="backed-by__card" {{ block.shopify_attributes }}>
+              <div class="backed-by__card-image">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 768 }}"
+                    srcset="
+                      {{ block.settings.image | image_url: width: 375 }} 375w,
+                      {{ block.settings.image | image_url: width: 550 }} 550w,
+                      {{ block.settings.image | image_url: width: 768 }} 768w
+                    "
+                    sizes="(min-width: 990px) 384px, calc(100vw - 24px)"
+                    alt="{{ block.settings.name | escape }}"
+                    class="backed-by__card-img"
+                    width="384"
+                    height="364"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="backed-by__card-placeholder"></div>
+                {%- endif -%}
+
+                <button class="backed-by__play-btn" aria-label="{{ 'accessibility.play_video' | t }}">
+                  <img
+                    src="{{ 'frame-308.svg' | asset_url }}"
+                    alt=""
+                    width="20"
+                    height="20"
+                    class="backed-by__play-icon"
+                  >
+                </button>
+
+                <div class="backed-by__mute-icon">
+                  <img
+                    src="{{ 'volume-mute-solid.svg' | asset_url }}"
+                    alt=""
+                    width="24"
+                    height="24"
+                  >
+                </div>
+              </div>
+
+              {%- if block.settings.quote != blank -%}
+                <p class="backed-by__card-quote">{{ block.settings.quote }}</p>
+              {%- endif -%}
+
+              <div class="backed-by__card-info">
+                {%- if block.settings.name != blank -%}
+                  <p class="backed-by__card-name">{{ block.settings.name | escape }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.credentials != blank -%}
+                  <p class="backed-by__card-credentials">{{ block.settings.credentials | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="backed-by__nav">
+          <button
+            class="backed-by__nav-btn backed-by__nav-btn--prev"
+            aria-label="{{ 'accessibility.previous' | t }}"
+            data-direction="prev"
+          >
+            <img src="{{ 'icon-button.svg' | asset_url }}" alt="" width="44" height="32">
+          </button>
+          <button
+            class="backed-by__nav-btn backed-by__nav-btn--next"
+            aria-label="{{ 'accessibility.next' | t }}"
+            data-direction="next"
+          >
+            <img src="{{ 'icon-button-2.svg' | asset_url }}" alt="" width="44" height="32">
+          </button>
+        </div>
+
+        {%- if section.settings.show_dividers -%}
+          <hr class="backed-by__divider">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function() {
+    var section = document.getElementById('backed-by-grid-{{ section.id }}');
+    if (!section) return;
+    var wrapper = section.closest('.backed-by__grid-wrapper');
+    if (!wrapper) return;
+    var buttons = wrapper.querySelectorAll('.backed-by__nav-btn');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function(e) {
+        var dir = this.getAttribute('data-direction');
+        var card = section.querySelector('.backed-by__card');
+        if (!card) return;
+        var scrollAmount = card.offsetWidth + 20;
+        section.scrollBy({
+          left: dir === 'next' ? scrollAmount : -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  .backed-by {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding-inline: 12px;
+  }
+
+  .backed-by__heading {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .backed-by__heading strong {
+    font-weight: 700;
+  }
+
+  .backed-by__subtitle {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .backed-by__grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .backed-by__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0;
+    width: 100%;
+  }
+
+  .backed-by__grid {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .backed-by__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .backed-by__card {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    scroll-snap-align: start;
+  }
+
+  .backed-by__card-image {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 384 / 364;
+  }
+
+  .backed-by__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .backed-by__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-foreground);
+    opacity: 0.1;
+  }
+
+  .backed-by__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .backed-by__play-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  .backed-by__mute-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .backed-by__mute-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .backed-by__card-quote {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    color: #414141;
+    margin: 0;
+    padding: 0 8px;
+  }
+
+  .backed-by__card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .backed-by__card-name {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .backed-by__card-credentials {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .backed-by__nav {
+    display: flex;
+    gap: 2px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .backed-by__nav-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .backed-by__nav-btn img {
+    display: block;
+  }
+
+  @media screen and (min-width: 990px) {
+    .backed-by {
+      gap: 24px;
+      align-items: center;
+      padding-inline: 0;
+    }
+
+    .backed-by__heading {
+      font-size: 48px;
+      line-height: 52px;
+      text-align: center;
+    }
+
+    .backed-by__subtitle {
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .backed-by__grid-wrapper {
+      gap: 24px;
+    }
+
+    .backed-by__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      overflow-x: visible;
+      scroll-snap-type: none;
+    }
+
+    .backed-by__card {
+      flex: none;
+    }
+
+    .backed-by__card-quote {
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    .backed-by__card-name {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .backed-by__card-credentials {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .backed-by__nav {
+      display: none;
+    }
+
+    .backed-by__mute-icon {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.backed_by",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "<p>Backed by <strong>6000+</strong> cardiologists and scientists</p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:settings.subheading",
+      "default": "Founded on Nobel Prize-Winning Science. Validated in Real Life."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "t:settings.show_dividers",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "expert-card",
+      "name": "t:names.expert_card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings.image"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "t:settings.video_url"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "t:settings.quote",
+          "default": "\"No other brand would dare call a cardiologist. Humann did.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:settings.name_label",
+          "default": "Dr. Christopher Davis, MD"
+        },
+        {
+          "type": "textarea",
+          "id": "credentials",
+          "label": "t:settings.credentials",
+          "default": "Chief Cardiologist at Humann, Triple Board-Certified Interventional Cardiologist, Fellow of the American College of Cardiology"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "t:names.backed_by",
+      "blocks": [
+        {
+          "type": "expert-card",
+          "settings": {
+            "quote": "\"No other brand would dare call a cardiologist. Humann did.\"",
+            "name": "Dr. Christopher Davis, MD",
+            "credentials": "Chief Cardiologist at Humann, Triple Board-Certified Interventional Cardiologist, Fellow of the American College of Cardiology"
+          }
+        },
+        {
+          "type": "expert-card",
+          "settings": {
+            "quote": "\"Humann makes the science feel accessible and actionable.\"",
+            "name": "Yousef Elyaman, MD",
+            "credentials": "Medical Director at Humann, Board Certified in Internal Medicine and Integrative Medicine from the American Board of Physician Specialties"
+          }
+        },
+        {
+          "type": "expert-card",
+          "settings": {
+            "quote": "\"It's refreshing to see a company take science seriously.\"",
+            "name": "Penny Kris-Etherton, PhD",
+            "credentials": "Science Advisory Board Member at Humann, past chair of the American Heart Association Council on Lifestyle and Cardiometabolic"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
