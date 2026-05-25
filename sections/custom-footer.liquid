@@ -534,6 +534,14 @@
       padding: 0;
     }
   }
+
+  /* Mobile padding override — Figma specifies 16px top/bottom, overriding the spacing-style 20px floor */
+  @media screen and (max-width: 749px) {
+    .custom-footer.spacing-style {
+      padding-block-start: 16px;
+      padding-block-end: 16px;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
