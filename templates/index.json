@@ -19,7 +19,7 @@
             "heading_color": "#BC0F0F",
             "subtitle": "Combines category-leading trust with clinically researched cardiovascular support.",
             "subtitle_color": "#BC0F0F",
-            "show_divider": true,
+            "show_divider": false,
             "divider_color": "#BC0F0F",
             "button_text": "SHOP SUPERBEETS",
             "product_image": "shopify://shop_images/hero-mobile-header-31301281.png",

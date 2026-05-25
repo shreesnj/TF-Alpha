@@ -24,6 +24,7 @@
                 --heading-color: {{ block.settings.heading_color }};
                 --subtitle-color: {{ block.settings.subtitle_color }};
                 --divider-color: {{ block.settings.divider_color }};
+                {% if block.settings.product_image != blank %}--product-image-url: url('{{ block.settings.product_image | image_url: width: 750 }}');{% endif %}
               "
               {{ block.shopify_attributes }}
             >
@@ -355,6 +356,11 @@
     .hero-carousel__slide--content {
       padding: 32px 12px 20px 12px;
       align-items: center;
+      background-image: var(--product-image-url, none);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 620px;
     }
 
     .hero-carousel__grid {
@@ -399,8 +405,7 @@
     }
 
     .hero-carousel__image-col {
-      flex: none;
-      width: 100%;
+      display: none;
     }
 
     .hero-carousel__badge-image {
